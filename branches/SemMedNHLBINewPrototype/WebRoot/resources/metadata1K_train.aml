@@ -1,0 +1,4012 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<attributeset default_source="metadata1K_train.dat">
+  <label
+    name         = "label"
+    valuetype    = "nominal">
+       <value>NEG</value>
+       <value>POS</value>
+  </label>
+  <id
+    name         = "id"
+    valuetype    = "integer"/>
+  <attribute
+    name         = "2_Pyridinylmethylsulfinylbenzimidazoles"
+    sourcecol    = "1"
+    valuetype    = "real"/>
+  <attribute
+    name         = "AIDS_Related_Opportunistic_Infections_prevention___control"
+    sourcecol    = "2"
+    valuetype    = "real"/>
+  <attribute
+    name         = "APACHE"
+    sourcecol    = "3"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Abdomen"
+    sourcecol    = "4"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Abdomen_surgery"
+    sourcecol    = "5"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Abortion__Spontaneous_epidemiology"
+    sourcecol    = "6"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Absorbable_Implants"
+    sourcecol    = "7"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Accidental_Falls_prevention___control_statistics___numerical_data"
+    sourcecol    = "8"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Accidents__Traffic"
+    sourcecol    = "9"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Acetylcholine_pharmacology"
+    sourcecol    = "10"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Activities_of_Daily_Living"
+    sourcecol    = "11"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Acute_Disease"
+    sourcecol    = "12"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Adaptation__Psychological"
+    sourcecol    = "13"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Adenoviridae_genetics"
+    sourcecol    = "14"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Adjuvants__Immunologic_therapeutic_use"
+    sourcecol    = "15"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Administration__Cutaneous"
+    sourcecol    = "16"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Administration__Inhalation"
+    sourcecol    = "17"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Administration__Intranasal"
+    sourcecol    = "18"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Administration__Intravaginal"
+    sourcecol    = "19"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Administration__Oral"
+    sourcecol    = "20"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Administration__Topical"
+    sourcecol    = "21"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Adolescent_Psychology"
+    sourcecol    = "22"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Adrenal_Cortex_Hormones_therapeutic_use"
+    sourcecol    = "23"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Adrenergic_beta_Agonists_administration___dosage"
+    sourcecol    = "24"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Adrenergic_beta_Antagonists_adverse_effects_therapeutic_use"
+    sourcecol    = "25"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Adrenomedullin"
+    sourcecol    = "26"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Adult"
+    sourcecol    = "27"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Adverse_Drug_Reaction_Reporting_Systems"
+    sourcecol    = "28"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Affect"
+    sourcecol    = "29"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Aged"
+    sourcecol    = "30"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Aging_psychology"
+    sourcecol    = "31"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Airway_Resistance"
+    sourcecol    = "32"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Alanine_Transaminase_blood"
+    sourcecol    = "33"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Albuterol_therapeutic_use"
+    sourcecol    = "34"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Alcohol_Drinking"
+    sourcecol    = "35"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Alleles"
+    sourcecol    = "36"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Alzheimer_Disease_drug_therapy"
+    sourcecol    = "37"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Ambulatory_Care"
+    sourcecol    = "38"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Amino_Acid_Sequence"
+    sourcecol    = "39"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Analysis_of_Variance"
+    sourcecol    = "40"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Anastomosis__Surgical"
+    sourcecol    = "41"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Anastomosis__Surgical_methods"
+    sourcecol    = "42"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Androstadienes_administration___dosage"
+    sourcecol    = "43"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Aneuploidy"
+    sourcecol    = "44"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Angioplasty__Balloon"
+    sourcecol    = "45"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Angioplasty__Transluminal__Percutaneous_Coronary"
+    sourcecol    = "46"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Angioplasty__Transluminal__Percutaneous_Coronary_adverse_effects"
+    sourcecol    = "47"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Angiotensin_Converting_Enzyme_Inhibitors_therapeutic_use"
+    sourcecol    = "48"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Animals"
+    sourcecol    = "49"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Anti_Anxiety_Agents_therapeutic_use"
+    sourcecol    = "50"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Anti_Asthmatic_Agents_administration___dosage"
+    sourcecol    = "51"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Anti_Bacterial_Agents_administration___dosage_therapeutic_use"
+    sourcecol    = "52"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Anti_Bacterial_Agents_therapeutic_use"
+    sourcecol    = "53"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Anti_HIV_Agents_therapeutic_use"
+    sourcecol    = "54"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Anti_Infective_Agents_therapeutic_use"
+    sourcecol    = "55"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Anti_Inflammatory_Agents__Non_Steroidal_administration___dosage_adverse"
+    sourcecol    = "56"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Anti_Inflammatory_Agents__Non_Steroidal_therapeutic_use"
+    sourcecol    = "57"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Anti_Inflammatory_Agents_administration___dosage"
+    sourcecol    = "58"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Anti_Inflammatory_Agents_therapeutic_use"
+    sourcecol    = "59"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Anti_Ulcer_Agents_therapeutic_use"
+    sourcecol    = "60"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Anticoagulants_administration___dosage"
+    sourcecol    = "61"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Anticoagulants_therapeutic_use"
+    sourcecol    = "62"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Antidepressive_Agents__Second_Generation_administration___dosage_adverse"
+    sourcecol    = "63"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Antidepressive_Agents__Second_Generation_therapeutic_use"
+    sourcecol    = "64"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Antidepressive_Agents__Tricyclic_therapeutic_use"
+    sourcecol    = "65"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Antidepressive_Agents_adverse_effects_therapeutic_use"
+    sourcecol    = "66"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Antidepressive_Agents_therapeutic_use"
+    sourcecol    = "67"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Antifungal_Agents_therapeutic_use"
+    sourcecol    = "68"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Antigens__CD34_analysis"
+    sourcecol    = "69"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Antihypertensive_Agents_administration___dosage"
+    sourcecol    = "70"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Antihypertensive_Agents_adverse_effects_therapeutic_use"
+    sourcecol    = "71"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Antihypertensive_Agents_pharmacology"
+    sourcecol    = "72"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Antihypertensive_Agents_therapeutic_use"
+    sourcecol    = "73"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Antilipemic_Agents_therapeutic_use"
+    sourcecol    = "74"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Antineoplastic_Agents__Hormonal_adverse_effects_therapeutic_use"
+    sourcecol    = "75"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Antineoplastic_Agents__Hormonal_therapeutic_use"
+    sourcecol    = "76"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Antineoplastic_Agents_administration___dosage"
+    sourcecol    = "77"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Antineoplastic_Agents_adverse_effects"
+    sourcecol    = "78"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Antineoplastic_Agents_therapeutic_use"
+    sourcecol    = "79"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Antineoplastic_Combined_Chemotherapy_Protocols_adverse"
+    sourcecol    = "80"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Antineoplastic_Combined_Chemotherapy_Protocols_therapeutic_use"
+    sourcecol    = "81"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Antiparkinson_Agents_adverse_effects"
+    sourcecol    = "82"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Antipsychotic_Agents_adverse_effects"
+    sourcecol    = "83"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Antipsychotic_Agents_adverse_effects_therapeutic_use"
+    sourcecol    = "84"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Antipsychotic_Agents_therapeutic_use"
+    sourcecol    = "85"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Antirheumatic_Agents_therapeutic_use"
+    sourcecol    = "86"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Antitubercular_Agents_therapeutic_use"
+    sourcecol    = "87"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Anxiety_etiology"
+    sourcecol    = "88"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Apgar_Score"
+    sourcecol    = "89"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Apolipoproteins_E_genetics"
+    sourcecol    = "90"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Apoptosis"
+    sourcecol    = "91"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Apoptosis_drug_effects"
+    sourcecol    = "92"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Apoptosis_physiology"
+    sourcecol    = "93"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Arteries"
+    sourcecol    = "94"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Arthritis__Rheumatoid_drug_therapy"
+    sourcecol    = "95"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Arthroplasty__Replacement__Hip_adverse_effects"
+    sourcecol    = "96"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Arthroscopy"
+    sourcecol    = "97"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Artifacts"
+    sourcecol    = "98"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Asian_Continental_Ancestry_Group"
+    sourcecol    = "99"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Aspirin_therapeutic_use"
+    sourcecol    = "100"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Asthma_diagnosis_drug_therapy"
+    sourcecol    = "101"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Asthma_drug_therapy"
+    sourcecol    = "102"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Asthma_drug_therapy_physiopathology"
+    sourcecol    = "103"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Attention_Deficit_Disorder_with"
+    sourcecol    = "104"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Attitude"
+    sourcecol    = "105"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Attitude_of_Health_Personnel"
+    sourcecol    = "106"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Attitude_to_Death"
+    sourcecol    = "107"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Attitude_to_Health"
+    sourcecol    = "108"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Australia"
+    sourcecol    = "109"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Authorship"
+    sourcecol    = "110"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Autoantibodies_immunology"
+    sourcecol    = "111"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Awards_and_Prizes"
+    sourcecol    = "112"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Balloon_Dilatation"
+    sourcecol    = "113"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Bandages"
+    sourcecol    = "114"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Base_Sequence"
+    sourcecol    = "115"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Behavior_Therapy_methods"
+    sourcecol    = "116"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Benzodiazepines"
+    sourcecol    = "117"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Bereavement"
+    sourcecol    = "118"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Bias__Epidemiology_"
+    sourcecol    = "119"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Bilirubin_blood"
+    sourcecol    = "120"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Biofeedback__Psychology_"
+    sourcecol    = "121"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Biomechanics"
+    sourcecol    = "122"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Biopsy"
+    sourcecol    = "123"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Birth_Weight"
+    sourcecol    = "124"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Blood_Flow_Velocity"
+    sourcecol    = "125"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Blood_Flow_Velocity_drug_effects"
+    sourcecol    = "126"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Blood_Gas_Analysis"
+    sourcecol    = "127"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Blood_Glucose_metabolism"
+    sourcecol    = "128"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Blood_Pressure_drug_effects"
+    sourcecol    = "129"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Blood_Transfusion"
+    sourcecol    = "130"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Blood_Transfusion_adverse_effects"
+    sourcecol    = "131"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Blood_Transfusion_statistics___numerical_data"
+    sourcecol    = "132"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Blood_Vessel_Prosthesis"
+    sourcecol    = "133"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Blood_Vessel_Prosthesis_Implantation"
+    sourcecol    = "134"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Blotting__Northern"
+    sourcecol    = "135"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Blotting__Western"
+    sourcecol    = "136"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Body_Height"
+    sourcecol    = "137"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Body_Temperature"
+    sourcecol    = "138"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Bone_Density_drug_effects"
+    sourcecol    = "139"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Bone_Marrow_Transplantation"
+    sourcecol    = "140"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Bone_Nails"
+    sourcecol    = "141"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Bone_Wires"
+    sourcecol    = "142"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Boston"
+    sourcecol    = "143"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Brain_Mapping"
+    sourcecol    = "144"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Brain_metabolism"
+    sourcecol    = "145"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Brain_physiopathology"
+    sourcecol    = "146"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Breast_Feeding"
+    sourcecol    = "147"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Breast_Neoplasms_pathology"
+    sourcecol    = "148"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Breast_pathology"
+    sourcecol    = "149"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Bronchial_Provocation_Tests"
+    sourcecol    = "150"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Bronchodilator_Agents_administration___dosage_adverse_effects"
+    sourcecol    = "151"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Bronchodilator_Agents_therapeutic_use"
+    sourcecol    = "152"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Bronchoscopy"
+    sourcecol    = "153"
+    valuetype    = "real"/>
+  <attribute
+    name         = "CD4_Lymphocyte_Count"
+    sourcecol    = "154"
+    valuetype    = "real"/>
+  <attribute
+    name         = "C_Peptide_blood"
+    sourcecol    = "155"
+    valuetype    = "real"/>
+  <attribute
+    name         = "C_Reactive_Protein_metabolism"
+    sourcecol    = "156"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cadaver"
+    sourcecol    = "157"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Calcium_metabolism"
+    sourcecol    = "158"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Canada"
+    sourcecol    = "159"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Carcinoma__Non_Small_Cell_Lung_drug_therapy"
+    sourcecol    = "160"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cardiac_Pacing__Artificial_methods"
+    sourcecol    = "161"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cardiology"
+    sourcecol    = "162"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cardiopulmonary_Resuscitation"
+    sourcecol    = "163"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cardiovascular_Diseases_mortality"
+    sourcecol    = "164"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cardiovascular_Diseases_prevention___control"
+    sourcecol    = "165"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Career_Choice"
+    sourcecol    = "166"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Career_Mobility"
+    sourcecol    = "167"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cartilage_transplantation"
+    sourcecol    = "168"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Case_Control_Studies"
+    sourcecol    = "169"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Catheter_Ablation"
+    sourcecol    = "170"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Causality"
+    sourcecol    = "171"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cause_of_Death"
+    sourcecol    = "172"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cell_Count"
+    sourcecol    = "173"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cell_Division"
+    sourcecol    = "174"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cell_Division_drug_effects"
+    sourcecol    = "175"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cell_Division_physiology"
+    sourcecol    = "176"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cell_Line"
+    sourcecol    = "177"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cells__Cultured"
+    sourcecol    = "178"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cerebral_Cortex_pathology"
+    sourcecol    = "179"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cerebrovascular_Accident_complications"
+    sourcecol    = "180"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cerebrovascular_Accident_drug_therapy"
+    sourcecol    = "181"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cerebrovascular_Circulation"
+    sourcecol    = "182"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cerebrovascular_Circulation_physiology"
+    sourcecol    = "183"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cesarean_Section"
+    sourcecol    = "184"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Chemotherapy__Adjuvant"
+    sourcecol    = "185"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Chi_Square_Distribution"
+    sourcecol    = "186"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Child_Development"
+    sourcecol    = "187"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Child_Psychology"
+    sourcecol    = "188"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Child_Welfare"
+    sourcecol    = "189"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Choice_Behavior"
+    sourcecol    = "190"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cholangiopancreatography__Endoscopic_Retrograde"
+    sourcecol    = "191"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cholesterol__HDL_blood"
+    sourcecol    = "192"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cholesterol_blood"
+    sourcecol    = "193"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cholinesterase_Inhibitors_therapeutic_use"
+    sourcecol    = "194"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Chromatography__High_Pressure_Liquid"
+    sourcecol    = "195"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Chromosome_Disorders"
+    sourcecol    = "196"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Chromosome_Mapping"
+    sourcecol    = "197"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Circadian_Rhythm"
+    sourcecol    = "198"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cisplatin_administration___dosage"
+    sourcecol    = "199"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cisplatin_administration___dosage_adverse_effects"
+    sourcecol    = "200"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Climacteric_drug_effects"
+    sourcecol    = "201"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Clinical_Competence"
+    sourcecol    = "202"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Clinical_Protocols"
+    sourcecol    = "203"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cognition_Disorders_diagnosis"
+    sourcecol    = "204"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cognition_Disorders_etiology"
+    sourcecol    = "205"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cognition_drug_effects"
+    sourcecol    = "206"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cognitive_Therapy"
+    sourcecol    = "207"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cognitive_Therapy_methods"
+    sourcecol    = "208"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cohort_Studies"
+    sourcecol    = "209"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cold"
+    sourcecol    = "210"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Colonoscopy"
+    sourcecol    = "211"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Colorectal_Neoplasms_pathology"
+    sourcecol    = "212"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Coloring_Agents_diagnostic_use"
+    sourcecol    = "213"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Combined_Modality_Therapy"
+    sourcecol    = "214"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Commerce"
+    sourcecol    = "215"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Communication"
+    sourcecol    = "216"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Community_Health_Services"
+    sourcecol    = "217"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Comorbidity"
+    sourcecol    = "218"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Computer_Simulation"
+    sourcecol    = "219"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Confidence_Intervals"
+    sourcecol    = "220"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Conflict_of_Interest"
+    sourcecol    = "221"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Conscious_Sedation"
+    sourcecol    = "222"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Continuity_of_Patient_Care"
+    sourcecol    = "223"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Contrast_Media_administration___dosage"
+    sourcecol    = "224"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Controlled_Clinical_Trials"
+    sourcecol    = "225"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Coronary_Angiography"
+    sourcecol    = "226"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Coronary_Disease_therapy"
+    sourcecol    = "227"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Counseling"
+    sourcecol    = "228"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Craniotomy"
+    sourcecol    = "229"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Creatine_Kinase_blood"
+    sourcecol    = "230"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Creatinine_blood"
+    sourcecol    = "231"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Creatinine_urine"
+    sourcecol    = "232"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cricetinae"
+    sourcecol    = "233"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Crohn_Disease_drug_therapy"
+    sourcecol    = "234"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cross_Infection_prevention___control"
+    sourcecol    = "235"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cross_Over_Studies"
+    sourcecol    = "236"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cross_Sectional_Studies"
+    sourcecol    = "237"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cultural_Characteristics"
+    sourcecol    = "238"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Culture"
+    sourcecol    = "239"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cyclophosphamide_administration___dosage"
+    sourcecol    = "240"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Cytokines_metabolism"
+    sourcecol    = "241"
+    valuetype    = "real"/>
+  <attribute
+    name         = "DNA_Mutational_Analysis"
+    sourcecol    = "242"
+    valuetype    = "real"/>
+  <attribute
+    name         = "DNA_Primers"
+    sourcecol    = "243"
+    valuetype    = "real"/>
+  <attribute
+    name         = "DNA__Viral_analysis"
+    sourcecol    = "244"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Data_Collection"
+    sourcecol    = "245"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Data_Collection_methods"
+    sourcecol    = "246"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Databases__Bibliographic"
+    sourcecol    = "247"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Databases__Factual"
+    sourcecol    = "248"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Death__Sudden__Cardiac_etiology"
+    sourcecol    = "249"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Decision_Making"
+    sourcecol    = "250"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Decision_Trees"
+    sourcecol    = "251"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Decompression__Surgical"
+    sourcecol    = "252"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Delayed_Action_Preparations"
+    sourcecol    = "253"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Delivery_of_Health_Care_economics"
+    sourcecol    = "254"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Delivery_of_Health_Care_organization___administration"
+    sourcecol    = "255"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Demography"
+    sourcecol    = "256"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Denmark_epidemiology"
+    sourcecol    = "257"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Depression_therapy"
+    sourcecol    = "258"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Depressive_Disorder_drug_therapy"
+    sourcecol    = "259"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Depressive_Disorder_drug_therapy_epidemiology_psychology"
+    sourcecol    = "260"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Dexamethasone_therapeutic_use"
+    sourcecol    = "261"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Diabetes_Mellitus__Type_2_blood"
+    sourcecol    = "262"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Diabetes_Mellitus__Type_2_blood_drug_therapy"
+    sourcecol    = "263"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Diabetes_Mellitus__Type_2_blood_drug_therapy_physiopathology"
+    sourcecol    = "264"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Diabetic_Diet"
+    sourcecol    = "265"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Diagnosis__Differential"
+    sourcecol    = "266"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Diagnosis__Dual__Psychiatry_"
+    sourcecol    = "267"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Diagnostic_Errors"
+    sourcecol    = "268"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Diet__Reducing"
+    sourcecol    = "269"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Dietary_Fiber_administration___dosage"
+    sourcecol    = "270"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Dietary_Supplements"
+    sourcecol    = "271"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Disability_Evaluation"
+    sourcecol    = "272"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Disease_Free_Survival"
+    sourcecol    = "273"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Disease_Models__Animal"
+    sourcecol    = "274"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Disease_Outbreaks"
+    sourcecol    = "275"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Disease_Progression"
+    sourcecol    = "276"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Disease_Susceptibility"
+    sourcecol    = "277"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Dogs"
+    sourcecol    = "278"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Dominance__Cerebral_physiology"
+    sourcecol    = "279"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Dose_Response_Relationship__Drug"
+    sourcecol    = "280"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Double_Blind_Method"
+    sourcecol    = "281"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Doxorubicin_administration___dosage"
+    sourcecol    = "282"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Doxorubicin_therapeutic_use"
+    sourcecol    = "283"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Drainage"
+    sourcecol    = "284"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Drug_Administration_Schedule"
+    sourcecol    = "285"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Drug_Evaluation__Preclinical"
+    sourcecol    = "286"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Drug_Industry"
+    sourcecol    = "287"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Drug_Resistance"
+    sourcecol    = "288"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Drug_Resistance__Microbial"
+    sourcecol    = "289"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Drug_Resistance__Multiple"
+    sourcecol    = "290"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Drug_Therapy__Combination"
+    sourcecol    = "291"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Drug_Utilization"
+    sourcecol    = "292"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Eating"
+    sourcecol    = "293"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Echocardiography__Doppler__Color"
+    sourcecol    = "294"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Echocardiography_methods"
+    sourcecol    = "295"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Education"
+    sourcecol    = "296"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Education__Medical__Continuing"
+    sourcecol    = "297"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Electric_Stimulation"
+    sourcecol    = "298"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Electrocardiography_drug_effects"
+    sourcecol    = "299"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Electroencephalography"
+    sourcecol    = "300"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Electrophysiology"
+    sourcecol    = "301"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Embryonic_and_Fetal_Development_physiology"
+    sourcecol    = "302"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Emergencies"
+    sourcecol    = "303"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Emergency_Service__Hospital"
+    sourcecol    = "304"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Emergency_Treatment"
+    sourcecol    = "305"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Emigration_and_Immigration"
+    sourcecol    = "306"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Emotions"
+    sourcecol    = "307"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Employment"
+    sourcecol    = "308"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Endoscopy"
+    sourcecol    = "309"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Endosonography"
+    sourcecol    = "310"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Endothelium__Vascular_drug_effects_physiopathology"
+    sourcecol    = "311"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Endothelium__Vascular_pathology"
+    sourcecol    = "312"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Endothelium__Vascular_physiopathology"
+    sourcecol    = "313"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Energy_Intake"
+    sourcecol    = "314"
+    valuetype    = "real"/>
+  <attribute
+    name         = "England"
+    sourcecol    = "315"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Enzyme_Inhibitors_pharmacology"
+    sourcecol    = "316"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Epinephrine_blood"
+    sourcecol    = "317"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Equipment_Failure"
+    sourcecol    = "318"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Esophagoscopy"
+    sourcecol    = "319"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Esthetics"
+    sourcecol    = "320"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Estradiol_blood"
+    sourcecol    = "321"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Estrogen_Replacement_Therapy"
+    sourcecol    = "322"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Ethics__Medical"
+    sourcecol    = "323"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Ethnic_Groups_statistics___numerical_data"
+    sourcecol    = "324"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Etoposide_administration___dosage"
+    sourcecol    = "325"
+    valuetype    = "real"/>
+  <attribute
+    name         = "European_Continental_Ancestry_Group_statistics___numerical_data"
+    sourcecol    = "326"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Evidence_Based_Medicine"
+    sourcecol    = "327"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Exercise_Test"
+    sourcecol    = "328"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Exercise_Therapy"
+    sourcecol    = "329"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Exercise_Therapy_methods"
+    sourcecol    = "330"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Exercise_physiology"
+    sourcecol    = "331"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Factor_V_genetics"
+    sourcecol    = "332"
+    valuetype    = "real"/>
+  <attribute
+    name         = "False_Negative_Reactions"
+    sourcecol    = "333"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Family"
+    sourcecol    = "334"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Family_Practice_education"
+    sourcecol    = "335"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Family_Practice_organization___administration"
+    sourcecol    = "336"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Family_Practice_standards"
+    sourcecol    = "337"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Family_Relations"
+    sourcecol    = "338"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Fatal_Outcome"
+    sourcecol    = "339"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Fatigue"
+    sourcecol    = "340"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Female"
+    sourcecol    = "341"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Fertility_Agents__Female_therapeutic_use"
+    sourcecol    = "342"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Fertilization_in_Vitro"
+    sourcecol    = "343"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Fertilization_in_Vitro_methods"
+    sourcecol    = "344"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Fibrinolytic_Agents_administration___dosage"
+    sourcecol    = "345"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Fibrinolytic_Agents_therapeutic_use"
+    sourcecol    = "346"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Fibrosis"
+    sourcecol    = "347"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Finland_epidemiology"
+    sourcecol    = "348"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Flow_Cytometry"
+    sourcecol    = "349"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Fluid_Therapy"
+    sourcecol    = "350"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Fluoroscopy"
+    sourcecol    = "351"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Fluorouracil_administration___dosage"
+    sourcecol    = "352"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Fluoxetine_therapeutic_use"
+    sourcecol    = "353"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Focus_Groups"
+    sourcecol    = "354"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Follicle_Stimulating_Hormone_blood"
+    sourcecol    = "355"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Follow_Up_Studies"
+    sourcecol    = "356"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Football_injuries"
+    sourcecol    = "357"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Forced_Expiratory_Volume_drug_effects"
+    sourcecol    = "358"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Forced_Expiratory_Volume_physiology"
+    sourcecol    = "359"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Forecasting"
+    sourcecol    = "360"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Fracture_Healing"
+    sourcecol    = "361"
+    valuetype    = "real"/>
+  <attribute
+    name         = "France"
+    sourcecol    = "362"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Functional_Laterality"
+    sourcecol    = "363"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Functional_Laterality_physiology"
+    sourcecol    = "364"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Gastroesophageal_Reflux_drug_therapy"
+    sourcecol    = "365"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Gastrointestinal_Agents_therapeutic_use"
+    sourcecol    = "366"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Gastrointestinal_Diseases_chemically_induced"
+    sourcecol    = "367"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Gender_Identity"
+    sourcecol    = "368"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Gene_Therapy"
+    sourcecol    = "369"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Gene_Transfer_Techniques"
+    sourcecol    = "370"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Genetic_Markers"
+    sourcecol    = "371"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Genetic_Predisposition_to_Disease"
+    sourcecol    = "372"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Genetic_Predisposition_to_Disease_genetics"
+    sourcecol    = "373"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Genetic_Screening"
+    sourcecol    = "374"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Genetic_Vectors"
+    sourcecol    = "375"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Genotype"
+    sourcecol    = "376"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Germany"
+    sourcecol    = "377"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Germany_epidemiology"
+    sourcecol    = "378"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Gestational_Age"
+    sourcecol    = "379"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Glucocorticoids"
+    sourcecol    = "380"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Glucocorticoids_administration___dosage"
+    sourcecol    = "381"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Glucocorticoids_adverse_effects_therapeutic_use"
+    sourcecol    = "382"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Glucocorticoids_therapeutic_use"
+    sourcecol    = "383"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Glucose_Tolerance_Test"
+    sourcecol    = "384"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Gonadotropin_Releasing_Hormone_agonists"
+    sourcecol    = "385"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Government"
+    sourcecol    = "386"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Graft_Survival"
+    sourcecol    = "387"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Great_Britain"
+    sourcecol    = "388"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Greece"
+    sourcecol    = "389"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Guideline_Adherence"
+    sourcecol    = "390"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Guidelines"
+    sourcecol    = "391"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Guinea_Pigs"
+    sourcecol    = "392"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Gynecologic_Surgical_Procedures"
+    sourcecol    = "393"
+    valuetype    = "real"/>
+  <attribute
+    name         = "HIV_1_immunology"
+    sourcecol    = "394"
+    valuetype    = "real"/>
+  <attribute
+    name         = "HIV_Infections_complications"
+    sourcecol    = "395"
+    valuetype    = "real"/>
+  <attribute
+    name         = "HIV_Infections_drug_therapy_immunology"
+    sourcecol    = "396"
+    valuetype    = "real"/>
+  <attribute
+    name         = "HIV_Infections_drug_therapy_immunology_virology"
+    sourcecol    = "397"
+    valuetype    = "real"/>
+  <attribute
+    name         = "HIV_Infections_prevention___control"
+    sourcecol    = "398"
+    valuetype    = "real"/>
+  <attribute
+    name         = "HIV_Infections_transmission"
+    sourcecol    = "399"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Haplotypes"
+    sourcecol    = "400"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Health_Care_Rationing"
+    sourcecol    = "401"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Health_Care_Reform"
+    sourcecol    = "402"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Health_Care_Surveys"
+    sourcecol    = "403"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Health_Education"
+    sourcecol    = "404"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Health_Knowledge__Attitudes__Practice"
+    sourcecol    = "405"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Health_Policy"
+    sourcecol    = "406"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Health_Priorities"
+    sourcecol    = "407"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Health_Promotion"
+    sourcecol    = "408"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Health_Promotion_methods"
+    sourcecol    = "409"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Health_Services_Accessibility"
+    sourcecol    = "410"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Health_Services_Accessibility_statistics___numerical_data"
+    sourcecol    = "411"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Health_Services_Needs_and_Demand"
+    sourcecol    = "412"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Health_Services_Research"
+    sourcecol    = "413"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Health_Services_utilization"
+    sourcecol    = "414"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Health_Status"
+    sourcecol    = "415"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Health_Surveys"
+    sourcecol    = "416"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Heart_Failure__Congestive_drug_therapy"
+    sourcecol    = "417"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Heart_Failure__Congestive_drug_therapy_mortality"
+    sourcecol    = "418"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Heart_Failure__Congestive_drug_therapy_physiopathology"
+    sourcecol    = "419"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Heart_Rate_drug_effects"
+    sourcecol    = "420"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Heart_Transplantation"
+    sourcecol    = "421"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Heart_physiopathology"
+    sourcecol    = "422"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Heat"
+    sourcecol    = "423"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Helicobacter_Infections_drug_therapy"
+    sourcecol    = "424"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Helicobacter_pylori"
+    sourcecol    = "425"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Hematocrit"
+    sourcecol    = "426"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Hematopoietic_Stem_Cell_Transplantation"
+    sourcecol    = "427"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Hemodynamic_Processes_drug_effects"
+    sourcecol    = "428"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Hemodynamic_Processes_physiology"
+    sourcecol    = "429"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Hemoglobin_A__Glycosylated_analysis"
+    sourcecol    = "430"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Hemoglobin_A__Glycosylated_metabolism"
+    sourcecol    = "431"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Hemoglobins_analysis"
+    sourcecol    = "432"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Hemorrhage_chemically_induced"
+    sourcecol    = "433"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Heparin__Low_Molecular_Weight_therapeutic_use"
+    sourcecol    = "434"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Heparin_administration___dosage"
+    sourcecol    = "435"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Heparin_administration___dosage_adverse_effects"
+    sourcecol    = "436"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Hepatectomy"
+    sourcecol    = "437"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Heterozygote"
+    sourcecol    = "438"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Hip_Prosthesis"
+    sourcecol    = "439"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Hispanic_Americans"
+    sourcecol    = "440"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Histamine_H2_Antagonists_therapeutic_use"
+    sourcecol    = "441"
+    valuetype    = "real"/>
+  <attribute
+    name         = "History__17th_Century"
+    sourcecol    = "442"
+    valuetype    = "real"/>
+  <attribute
+    name         = "History__18th_Century"
+    sourcecol    = "443"
+    valuetype    = "real"/>
+  <attribute
+    name         = "History__19th_Century"
+    sourcecol    = "444"
+    valuetype    = "real"/>
+  <attribute
+    name         = "History__20th_Century"
+    sourcecol    = "445"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Home_Care_Services"
+    sourcecol    = "446"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Homocysteine_blood"
+    sourcecol    = "447"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Homosexuality__Male"
+    sourcecol    = "448"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Homozygote"
+    sourcecol    = "449"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Hong_Kong_epidemiology"
+    sourcecol    = "450"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Hospital_Costs"
+    sourcecol    = "451"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Hospital_Costs_statistics___numerical_data"
+    sourcecol    = "452"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Hospitalization"
+    sourcecol    = "453"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Hospitalization_economics"
+    sourcecol    = "454"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Hospitalization_statistics___numerical_data"
+    sourcecol    = "455"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Hydrocortisone_blood"
+    sourcecol    = "456"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Hydrogen_Ion_Concentration"
+    sourcecol    = "457"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Hypertension_complications"
+    sourcecol    = "458"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Hypertension_complications_drug_therapy"
+    sourcecol    = "459"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Hypertension_drug_therapy_physiopathology"
+    sourcecol    = "460"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Hypertension_physiopathology"
+    sourcecol    = "461"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Hypertrophy"
+    sourcecol    = "462"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Hypoglycemic_Agents_administration___dosage_therapeutic_use"
+    sourcecol    = "463"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Iatrogenic_Disease"
+    sourcecol    = "464"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Image_Processing__Computer_Assisted"
+    sourcecol    = "465"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Image_Processing__Computer_Assisted_methods"
+    sourcecol    = "466"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Immunization"
+    sourcecol    = "467"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Immunization_Programs"
+    sourcecol    = "468"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Immunocompromised_Host"
+    sourcecol    = "469"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Immunoenzyme_Techniques"
+    sourcecol    = "470"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Immunoglobulin_E_blood"
+    sourcecol    = "471"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Immunoglobulin_M_blood"
+    sourcecol    = "472"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Immunoglobulins__Intravenous_therapeutic_use"
+    sourcecol    = "473"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Immunohistochemistry"
+    sourcecol    = "474"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Immunosuppression"
+    sourcecol    = "475"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Immunosuppressive_Agents_adverse_effects_therapeutic_use"
+    sourcecol    = "476"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Immunotherapy"
+    sourcecol    = "477"
+    valuetype    = "real"/>
+  <attribute
+    name         = "In_Situ_Hybridization"
+    sourcecol    = "478"
+    valuetype    = "real"/>
+  <attribute
+    name         = "In_Situ_Nick_End_Labeling"
+    sourcecol    = "479"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Income"
+    sourcecol    = "480"
+    valuetype    = "real"/>
+  <attribute
+    name         = "India"
+    sourcecol    = "481"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Indians__North_American"
+    sourcecol    = "482"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Indoles_adverse_effects_therapeutic_use"
+    sourcecol    = "483"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Indoles_therapeutic_use"
+    sourcecol    = "484"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Infant_Food"
+    sourcecol    = "485"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Infant_Mortality"
+    sourcecol    = "486"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Infant__Low_Birth_Weight"
+    sourcecol    = "487"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Infant__Newborn"
+    sourcecol    = "488"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Infant__Premature"
+    sourcecol    = "489"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Infant__Very_Low_Birth_Weight"
+    sourcecol    = "490"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Infertility__Female_therapy"
+    sourcecol    = "491"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Informed_Consent"
+    sourcecol    = "492"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Infusions__Intravenous"
+    sourcecol    = "493"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Injections__Intramuscular"
+    sourcecol    = "494"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Injections__Intravenous"
+    sourcecol    = "495"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Injections__Subcutaneous"
+    sourcecol    = "496"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Insulin_Like_Growth_Factor_I_metabolism"
+    sourcecol    = "497"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Insulin_blood"
+    sourcecol    = "498"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Insulin_blood_secretion"
+    sourcecol    = "499"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Insulin_therapeutic_use"
+    sourcecol    = "500"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Insurance__Health"
+    sourcecol    = "501"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Intelligence"
+    sourcecol    = "502"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Intelligence_Tests"
+    sourcecol    = "503"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Intensive_Care"
+    sourcecol    = "504"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Interinstitutional_Relations"
+    sourcecol    = "505"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Interleukin_6_blood"
+    sourcecol    = "506"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Internal_External_Control"
+    sourcecol    = "507"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Internal_Fixators"
+    sourcecol    = "508"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Internet"
+    sourcecol    = "509"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Internship_and_Residency"
+    sourcecol    = "510"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Intervention_Studies"
+    sourcecol    = "511"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Interview__Psychological"
+    sourcecol    = "512"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Interviews_methods"
+    sourcecol    = "513"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Intraoperative_Care"
+    sourcecol    = "514"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Intubation__Intratracheal"
+    sourcecol    = "515"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Isoenzymes_metabolism"
+    sourcecol    = "516"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Israel"
+    sourcecol    = "517"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Italy"
+    sourcecol    = "518"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Italy_epidemiology"
+    sourcecol    = "519"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Japan"
+    sourcecol    = "520"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Judgment"
+    sourcecol    = "521"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Kidney_Transplantation"
+    sourcecol    = "522"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Knee_Joint"
+    sourcecol    = "523"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Knee_Prosthesis"
+    sourcecol    = "524"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Labor__Induced"
+    sourcecol    = "525"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Lactic_Acid_blood"
+    sourcecol    = "526"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Language"
+    sourcecol    = "527"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Laparoscopy_methods"
+    sourcecol    = "528"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Leadership"
+    sourcecol    = "529"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Leg_blood_supply"
+    sourcecol    = "530"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Leiomyoma_surgery"
+    sourcecol    = "531"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Length_of_Stay"
+    sourcecol    = "532"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Levodopa_adverse_effects"
+    sourcecol    = "533"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Liability__Legal"
+    sourcecol    = "534"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Life_Change_Events"
+    sourcecol    = "535"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Life_Expectancy"
+    sourcecol    = "536"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Ligands"
+    sourcecol    = "537"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Likelihood_Functions"
+    sourcecol    = "538"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Linear_Models"
+    sourcecol    = "539"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Linkage__Genetics_"
+    sourcecol    = "540"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Linkage__Genetics__genetics"
+    sourcecol    = "541"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Lipids_blood"
+    sourcecol    = "542"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Lipoproteins_blood"
+    sourcecol    = "543"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Liver_Transplantation"
+    sourcecol    = "544"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Liver_pathology"
+    sourcecol    = "545"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Logistic_Models"
+    sourcecol    = "546"
+    valuetype    = "real"/>
+  <attribute
+    name         = "London_epidemiology"
+    sourcecol    = "547"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Long_Term_Care"
+    sourcecol    = "548"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Losartan_therapeutic_use"
+    sourcecol    = "549"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Low_Back_Pain_therapy"
+    sourcecol    = "550"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Lung_Diseases__Obstructive_drug_therapy"
+    sourcecol    = "551"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Lung_Neoplasms_drug_therapy"
+    sourcecol    = "552"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Lung_Neoplasms_drug_therapy_pathology"
+    sourcecol    = "553"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Lung_pathology"
+    sourcecol    = "554"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Lung_pathology_radiography"
+    sourcecol    = "555"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Luteinizing_Hormone_blood"
+    sourcecol    = "556"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Lymph_Nodes_pathology"
+    sourcecol    = "557"
+    valuetype    = "real"/>
+  <attribute
+    name         = "MEDLINE"
+    sourcecol    = "558"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Magnetic_Resonance_Imaging"
+    sourcecol    = "559"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Magnetic_Resonance_Imaging_statistics___numerical_data"
+    sourcecol    = "560"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Male"
+    sourcecol    = "561"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Malpractice_legislation___jurisprudence"
+    sourcecol    = "562"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Mammaplasty_methods"
+    sourcecol    = "563"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Mammography"
+    sourcecol    = "564"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Managed_Care_Programs"
+    sourcecol    = "565"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Managed_Care_Programs_organization___administration"
+    sourcecol    = "566"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Manometry"
+    sourcecol    = "567"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Marital_Status"
+    sourcecol    = "568"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Mass_Screening_methods"
+    sourcecol    = "569"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Massachusetts_epidemiology"
+    sourcecol    = "570"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Materials_Testing"
+    sourcecol    = "571"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Medical_Audit"
+    sourcecol    = "572"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Medical_Errors"
+    sourcecol    = "573"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Medical_Futility"
+    sourcecol    = "574"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Medical_Staff__Hospital"
+    sourcecol    = "575"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Medically_Underserved_Area"
+    sourcecol    = "576"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Memory"
+    sourcecol    = "577"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Mental_Disorders_diagnosis_epidemiology"
+    sourcecol    = "578"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Mental_Disorders_epidemiology"
+    sourcecol    = "579"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Mental_Disorders_psychology"
+    sourcecol    = "580"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Mental_Recall"
+    sourcecol    = "581"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Meta_Analysis"
+    sourcecol    = "582"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Methotrexate_administration___dosage"
+    sourcecol    = "583"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Methotrexate_therapeutic_use"
+    sourcecol    = "584"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Mexico"
+    sourcecol    = "585"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Mice"
+    sourcecol    = "586"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Mice__Inbred_BALB_C"
+    sourcecol    = "587"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Mice__Inbred_C57BL"
+    sourcecol    = "588"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Mice__Knockout"
+    sourcecol    = "589"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Mice__Transgenic"
+    sourcecol    = "590"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Microsatellite_Repeats_genetics"
+    sourcecol    = "591"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Microscopy__Electron"
+    sourcecol    = "592"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Microsurgery_methods"
+    sourcecol    = "593"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Middle_Aged"
+    sourcecol    = "594"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Minority_Groups"
+    sourcecol    = "595"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Models__Organizational"
+    sourcecol    = "596"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Models__Psychological"
+    sourcecol    = "597"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Models__Statistical"
+    sourcecol    = "598"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Molecular_Sequence_Data"
+    sourcecol    = "599"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Morbidity"
+    sourcecol    = "600"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Mortality"
+    sourcecol    = "601"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Mother_Child_Relations"
+    sourcecol    = "602"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Mothers"
+    sourcecol    = "603"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Mothers_psychology"
+    sourcecol    = "604"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Multicenter_Studies"
+    sourcecol    = "605"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Muscle_Contraction"
+    sourcecol    = "606"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Muscle_Relaxants__Central_therapeutic_use"
+    sourcecol    = "607"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Muscle__Skeletal"
+    sourcecol    = "608"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Muscle__Skeletal_physiology"
+    sourcecol    = "609"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Mutation"
+    sourcecol    = "610"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Mutation_genetics"
+    sourcecol    = "611"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Myocardial_Infarction_drug_therapy"
+    sourcecol    = "612"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Myocardial_Reperfusion"
+    sourcecol    = "613"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Myocardium_pathology"
+    sourcecol    = "614"
+    valuetype    = "real"/>
+  <attribute
+    name         = "NG_Nitroarginine_Methyl_Ester_pharmacology"
+    sourcecol    = "615"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Narcotic_Antagonists_therapeutic_use"
+    sourcecol    = "616"
+    valuetype    = "real"/>
+  <attribute
+    name         = "National_Institutes_of_Health__U_S__"
+    sourcecol    = "617"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Nausea_chemically_induced"
+    sourcecol    = "618"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Nebulizers_and_Vaporizers"
+    sourcecol    = "619"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Needs_Assessment"
+    sourcecol    = "620"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Neoplasm_Invasiveness"
+    sourcecol    = "621"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Neoplasm_Metastasis"
+    sourcecol    = "622"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Neoplasm_Recurrence__Local"
+    sourcecol    = "623"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Neoplasm_Recurrence__Local_prevention___control"
+    sourcecol    = "624"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Neoplasms_complications"
+    sourcecol    = "625"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Neoplasms_mortality"
+    sourcecol    = "626"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Netherlands_epidemiology"
+    sourcecol    = "627"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Neuroprotective_Agents_therapeutic_use"
+    sourcecol    = "628"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Neutrophils_immunology"
+    sourcecol    = "629"
+    valuetype    = "real"/>
+  <attribute
+    name         = "New_South_Wales"
+    sourcecol    = "630"
+    valuetype    = "real"/>
+  <attribute
+    name         = "New_South_Wales_epidemiology"
+    sourcecol    = "631"
+    valuetype    = "real"/>
+  <attribute
+    name         = "New_York"
+    sourcecol    = "632"
+    valuetype    = "real"/>
+  <attribute
+    name         = "New_York_City"
+    sourcecol    = "633"
+    valuetype    = "real"/>
+  <attribute
+    name         = "New_Zealand"
+    sourcecol    = "634"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Nifedipine_therapeutic_use"
+    sourcecol    = "635"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Nitric_Oxide_Synthase_Type_II"
+    sourcecol    = "636"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Nitric_Oxide_Synthase_antagonists___inhibitors"
+    sourcecol    = "637"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Nitric_Oxide_blood"
+    sourcecol    = "638"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Nitric_Oxide_metabolism"
+    sourcecol    = "639"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Nitric_Oxide_physiology"
+    sourcecol    = "640"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Nootropic_Agents_therapeutic_use"
+    sourcecol    = "641"
+    valuetype    = "real"/>
+  <attribute
+    name         = "North_Carolina"
+    sourcecol    = "642"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Norway"
+    sourcecol    = "643"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Norway_epidemiology"
+    sourcecol    = "644"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Nuclear_Family"
+    sourcecol    = "645"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Nurse_Patient_Relations"
+    sourcecol    = "646"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Nursing_Evaluation_Research"
+    sourcecol    = "647"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Nursing_Homes"
+    sourcecol    = "648"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Nursing_Methodology_Research"
+    sourcecol    = "649"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Nursing_Theory"
+    sourcecol    = "650"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Nutritional_Status"
+    sourcecol    = "651"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Object_Attachment"
+    sourcecol    = "652"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Obstetric_Labor__Premature_prevention___control"
+    sourcecol    = "653"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Occupational_Exposure_adverse_effects"
+    sourcecol    = "654"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Odds_Ratio"
+    sourcecol    = "655"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Oligopeptides_pharmacology"
+    sourcecol    = "656"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Omeprazole_analogs___derivatives"
+    sourcecol    = "657"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Omeprazole_therapeutic_use"
+    sourcecol    = "658"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Ontario_epidemiology"
+    sourcecol    = "659"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Opioid_Related_Disorders_rehabilitation"
+    sourcecol    = "660"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Orchiectomy"
+    sourcecol    = "661"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Organizational_Innovation"
+    sourcecol    = "662"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Organizational_Objectives"
+    sourcecol    = "663"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Organizational_Policy"
+    sourcecol    = "664"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Orthopedic_Fixation_Devices"
+    sourcecol    = "665"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Orthopedic_Procedures_methods"
+    sourcecol    = "666"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Orthopedics"
+    sourcecol    = "667"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Orthotic_Devices"
+    sourcecol    = "668"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Osteoarthritis__Knee_drug_therapy"
+    sourcecol    = "669"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Osteotomy"
+    sourcecol    = "670"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Osteotomy_methods"
+    sourcecol    = "671"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Outcome_Assessment__Health_Care_"
+    sourcecol    = "672"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Outcome_and_Process_Assessment__Health_Care_"
+    sourcecol    = "673"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Outpatients"
+    sourcecol    = "674"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Ovarian_Neoplasms_drug_therapy"
+    sourcecol    = "675"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Ovulation_Induction"
+    sourcecol    = "676"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Ovulation_Induction_methods"
+    sourcecol    = "677"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Oximetry"
+    sourcecol    = "678"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Oxygen_Inhalation_Therapy"
+    sourcecol    = "679"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Paclitaxel_administration___dosage_adverse_effects"
+    sourcecol    = "680"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Pain_Measurement"
+    sourcecol    = "681"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Pain__Postoperative_drug_therapy"
+    sourcecol    = "682"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Pain_drug_therapy_etiology"
+    sourcecol    = "683"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Palliative_Care"
+    sourcecol    = "684"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Parenteral_Nutrition"
+    sourcecol    = "685"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Parity"
+    sourcecol    = "686"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Parkinson_Disease_drug_therapy"
+    sourcecol    = "687"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Patient_Admission_statistics___numerical_data"
+    sourcecol    = "688"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Patient_Advocacy"
+    sourcecol    = "689"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Patient_Compliance"
+    sourcecol    = "690"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Patient_Dropouts"
+    sourcecol    = "691"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Patient_Participation"
+    sourcecol    = "692"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Patient_Readmission"
+    sourcecol    = "693"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Patient_Satisfaction"
+    sourcecol    = "694"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Pediatric_Nursing"
+    sourcecol    = "695"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Pediatrics"
+    sourcecol    = "696"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Pediatrics_education"
+    sourcecol    = "697"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Pedigree"
+    sourcecol    = "698"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Peer_Group"
+    sourcecol    = "699"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Pennsylvania"
+    sourcecol    = "700"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Periodicals"
+    sourcecol    = "701"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Personal_Satisfaction"
+    sourcecol    = "702"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Personality_Inventory"
+    sourcecol    = "703"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Phenotype"
+    sourcecol    = "704"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Phosphorylation"
+    sourcecol    = "705"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Physical_Endurance"
+    sourcecol    = "706"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Physical_Therapy_Modalities"
+    sourcecol    = "707"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Physician_Patient_Relations"
+    sourcecol    = "708"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Physician_s_Practice_Patterns"
+    sourcecol    = "709"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Physician_s_Practice_Patterns_statistics___numerical_data"
+    sourcecol    = "710"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Physician_s_Role"
+    sourcecol    = "711"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Physicians"
+    sourcecol    = "712"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Physicians__Family"
+    sourcecol    = "713"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Phytotherapy"
+    sourcecol    = "714"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Pilot_Projects"
+    sourcecol    = "715"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Placebos"
+    sourcecol    = "716"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Plants__Medicinal"
+    sourcecol    = "717"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Platelet_Aggregation_Inhibitors_administration___dosage"
+    sourcecol    = "718"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Platelet_Aggregation_Inhibitors_administration___dosage_adverse_effects"
+    sourcecol    = "719"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Platelet_Aggregation_Inhibitors_therapeutic_use"
+    sourcecol    = "720"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Platelet_Glycoprotein_GPIIb_IIIa_Complex_antagonists___inhibitors"
+    sourcecol    = "721"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Point_Mutation"
+    sourcecol    = "722"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Point_Mutation_genetics"
+    sourcecol    = "723"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Point_of_Care_Systems"
+    sourcecol    = "724"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Politics"
+    sourcecol    = "725"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Polymerase_Chain_Reaction"
+    sourcecol    = "726"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Polymers"
+    sourcecol    = "727"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Polymorphism__Genetic"
+    sourcecol    = "728"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Polymorphism__Genetic_genetics"
+    sourcecol    = "729"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Polymorphism__Restriction_Fragment_Length"
+    sourcecol    = "730"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Population_Surveillance_methods"
+    sourcecol    = "731"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Portraits"
+    sourcecol    = "732"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Postmenopause"
+    sourcecol    = "733"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Postoperative_Care"
+    sourcecol    = "734"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Postoperative_Complications_diagnosis"
+    sourcecol    = "735"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Postoperative_Complications_drug_therapy"
+    sourcecol    = "736"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Postoperative_Complications_etiology"
+    sourcecol    = "737"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Postoperative_Complications_etiology_surgery"
+    sourcecol    = "738"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Postoperative_Complications_physiopathology"
+    sourcecol    = "739"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Postoperative_Complications_prevention___control"
+    sourcecol    = "740"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Postoperative_Complications_radiography"
+    sourcecol    = "741"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Postpartum_Period"
+    sourcecol    = "742"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Postprandial_Period"
+    sourcecol    = "743"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Posture_physiology"
+    sourcecol    = "744"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Practice_Guidelines"
+    sourcecol    = "745"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Practice_Guidelines_standards"
+    sourcecol    = "746"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Predictive_Value_of_Tests"
+    sourcecol    = "747"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Prednisone_therapeutic_use"
+    sourcecol    = "748"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Pregnancy"
+    sourcecol    = "749"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Pregnancy_Complications_prevention___control"
+    sourcecol    = "750"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Pregnancy_Outcome"
+    sourcecol    = "751"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Pregnancy_Trimester__First"
+    sourcecol    = "752"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Pregnancy_Trimester__Second"
+    sourcecol    = "753"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Pregnancy_Trimester__Third"
+    sourcecol    = "754"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Pregnancy__High_Risk"
+    sourcecol    = "755"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Pregnancy__Multiple"
+    sourcecol    = "756"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Prejudice"
+    sourcecol    = "757"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Premedication"
+    sourcecol    = "758"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Premenopause"
+    sourcecol    = "759"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Prenatal_Care_methods"
+    sourcecol    = "760"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Prescriptions__Drug"
+    sourcecol    = "761"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Prescriptions__Drug_statistics___numerical_data"
+    sourcecol    = "762"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Pressure"
+    sourcecol    = "763"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Prevalence"
+    sourcecol    = "764"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Primary_Prevention_methods"
+    sourcecol    = "765"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Probability"
+    sourcecol    = "766"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Professional_Family_Relations"
+    sourcecol    = "767"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Professional_Patient_Relations"
+    sourcecol    = "768"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Progesterone_blood"
+    sourcecol    = "769"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Prognosis"
+    sourcecol    = "770"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Program_Development"
+    sourcecol    = "771"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Prone_Position"
+    sourcecol    = "772"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Proportional_Hazards_Models"
+    sourcecol    = "773"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Prospective_Studies"
+    sourcecol    = "774"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Prostate_Specific_Antigen_blood"
+    sourcecol    = "775"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Prostheses_and_Implants"
+    sourcecol    = "776"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Proton_Pumps_antagonists___inhibitors"
+    sourcecol    = "777"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Psychiatric_Status_Rating_Scales"
+    sourcecol    = "778"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Psychiatric_Status_Rating_Scales_standards"
+    sourcecol    = "779"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Psychiatric_Status_Rating_Scales_statistics___numerical_data"
+    sourcecol    = "780"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Psychological_Theory"
+    sourcecol    = "781"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Psychometrics_methods"
+    sourcecol    = "782"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Psychotherapy__Brief_methods"
+    sourcecol    = "783"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Psychotherapy__Group"
+    sourcecol    = "784"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Psychotic_Disorders_therapy"
+    sourcecol    = "785"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Public_Health"
+    sourcecol    = "786"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Public_Opinion"
+    sourcecol    = "787"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Public_Policy"
+    sourcecol    = "788"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Publishing"
+    sourcecol    = "789"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Pulsatile_Flow"
+    sourcecol    = "790"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Quality_Adjusted_Life_Years"
+    sourcecol    = "791"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Quality_Assurance__Health_Care_methods"
+    sourcecol    = "792"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Quality_Control"
+    sourcecol    = "793"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Quality_Indicators__Health_Care"
+    sourcecol    = "794"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Quality_of_Health_Care"
+    sourcecol    = "795"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Quality_of_Life"
+    sourcecol    = "796"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Quebec"
+    sourcecol    = "797"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Questionnaires"
+    sourcecol    = "798"
+    valuetype    = "real"/>
+  <attribute
+    name         = "RNA__Messenger_analysis"
+    sourcecol    = "799"
+    valuetype    = "real"/>
+  <attribute
+    name         = "RNA__Messenger_metabolism"
+    sourcecol    = "800"
+    valuetype    = "real"/>
+  <attribute
+    name         = "RNA__Viral_analysis"
+    sourcecol    = "801"
+    valuetype    = "real"/>
+  <attribute
+    name         = "ROC_Curve"
+    sourcecol    = "802"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Rabbits"
+    sourcecol    = "803"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Radiography__Interventional"
+    sourcecol    = "804"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Radiography__Thoracic"
+    sourcecol    = "805"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Radioimmunoassay"
+    sourcecol    = "806"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Radiotherapy_adverse_effects"
+    sourcecol    = "807"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Randomized_Controlled_Trials"
+    sourcecol    = "808"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Randomized_Controlled_Trials_methods"
+    sourcecol    = "809"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Range_of_Motion__Articular_physiology"
+    sourcecol    = "810"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Rats"
+    sourcecol    = "811"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Rats__Inbred_SHR"
+    sourcecol    = "812"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Rats__Inbred_WKY"
+    sourcecol    = "813"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Rats__Sprague_Dawley"
+    sourcecol    = "814"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Rats__Wistar"
+    sourcecol    = "815"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Reaction_Time"
+    sourcecol    = "816"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Recombinant_Proteins_immunology"
+    sourcecol    = "817"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Recombinant_Proteins_therapeutic_use"
+    sourcecol    = "818"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Reconstructive_Surgical_Procedures"
+    sourcecol    = "819"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Recovery_of_Function"
+    sourcecol    = "820"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Recurrence"
+    sourcecol    = "821"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Recurrence_prevention___control"
+    sourcecol    = "822"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Reference_Standards"
+    sourcecol    = "823"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Reference_Values"
+    sourcecol    = "824"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Referral_and_Consultation"
+    sourcecol    = "825"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Regional_Blood_Flow"
+    sourcecol    = "826"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Regional_Blood_Flow_drug_effects"
+    sourcecol    = "827"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Registries_statistics___numerical_data"
+    sourcecol    = "828"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Remission_Induction"
+    sourcecol    = "829"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Reoperation"
+    sourcecol    = "830"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Research"
+    sourcecol    = "831"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Research_Support"
+    sourcecol    = "832"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Respiratory_Function_Tests"
+    sourcecol    = "833"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Resuscitation"
+    sourcecol    = "834"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Retrospective_Studies"
+    sourcecol    = "835"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Reverse_Transcriptase_Polymerase_Chain_Reaction"
+    sourcecol    = "836"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Rhytidoplasty_methods"
+    sourcecol    = "837"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Risk"
+    sourcecol    = "838"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Risk_Adjustment"
+    sourcecol    = "839"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Risk_Factors"
+    sourcecol    = "840"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Risk_Taking"
+    sourcecol    = "841"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Rotation"
+    sourcecol    = "842"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Rupture"
+    sourcecol    = "843"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Rural_Health"
+    sourcecol    = "844"
+    valuetype    = "real"/>
+  <attribute
+    name         = "SEER_Program"
+    sourcecol    = "845"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Safety"
+    sourcecol    = "846"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Saliva_chemistry"
+    sourcecol    = "847"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Sampling_Studies"
+    sourcecol    = "848"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Schizophrenia_diagnosis"
+    sourcecol    = "849"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Schizophrenia_drug_therapy"
+    sourcecol    = "850"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Schizophrenia_therapy"
+    sourcecol    = "851"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Schizophrenic_Psychology"
+    sourcecol    = "852"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Schools"
+    sourcecol    = "853"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Scotland"
+    sourcecol    = "854"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Scotland_epidemiology"
+    sourcecol    = "855"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Self_Care"
+    sourcecol    = "856"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Self_Disclosure"
+    sourcecol    = "857"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Semantics"
+    sourcecol    = "858"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Sensitivity_and_Specificity"
+    sourcecol    = "859"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Seroepidemiologic_Studies"
+    sourcecol    = "860"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Sertraline_therapeutic_use"
+    sourcecol    = "861"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Severity_of_Illness_Index"
+    sourcecol    = "862"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Sex_Characteristics"
+    sourcecol    = "863"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Sex_Factors"
+    sourcecol    = "864"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Sheep"
+    sourcecol    = "865"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Shoes"
+    sourcecol    = "866"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Sickness_Impact_Profile"
+    sourcecol    = "867"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Signal_Transduction"
+    sourcecol    = "868"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Signal_Transduction_physiology"
+    sourcecol    = "869"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Single_Blind_Method"
+    sourcecol    = "870"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Skin_Temperature"
+    sourcecol    = "871"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Sleep_Disorders_etiology"
+    sourcecol    = "872"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Sleep_physiology"
+    sourcecol    = "873"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Smoking_Cessation_methods"
+    sourcecol    = "874"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Smoking_adverse_effects_epidemiology"
+    sourcecol    = "875"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Soccer_injuries"
+    sourcecol    = "876"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Social_Adjustment"
+    sourcecol    = "877"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Social_Behavior"
+    sourcecol    = "878"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Social_Perception"
+    sourcecol    = "879"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Societies__Medical"
+    sourcecol    = "880"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Socioeconomic_Factors"
+    sourcecol    = "881"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Spain"
+    sourcecol    = "882"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Spain_epidemiology"
+    sourcecol    = "883"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Species_Specificity"
+    sourcecol    = "884"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Sputum_microbiology"
+    sourcecol    = "885"
+    valuetype    = "real"/>
+  <attribute
+    name         = "State_Medicine"
+    sourcecol    = "886"
+    valuetype    = "real"/>
+  <attribute
+    name         = "State_Medicine_economics"
+    sourcecol    = "887"
+    valuetype    = "real"/>
+  <attribute
+    name         = "State_Medicine_organization___administration"
+    sourcecol    = "888"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Statistics__Nonparametric"
+    sourcecol    = "889"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Stereotyping"
+    sourcecol    = "890"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Streptococcus_pyogenes"
+    sourcecol    = "891"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Stress__Mechanical"
+    sourcecol    = "892"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Stress__Psychological"
+    sourcecol    = "893"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Stress__Psychological_etiology"
+    sourcecol    = "894"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Substance_Abuse_Detection"
+    sourcecol    = "895"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Sulfonylurea_Compounds_therapeutic_use"
+    sourcecol    = "896"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Surgery"
+    sourcecol    = "897"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Surgery__Plastic"
+    sourcecol    = "898"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Surgical_Flaps"
+    sourcecol    = "899"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Surgical_Flaps_blood_supply"
+    sourcecol    = "900"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Surgical_Instruments"
+    sourcecol    = "901"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Surgical_Procedures__Elective"
+    sourcecol    = "902"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Surgical_Stapling"
+    sourcecol    = "903"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Survival_Analysis"
+    sourcecol    = "904"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Survival_Rate"
+    sourcecol    = "905"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Suture_Techniques"
+    sourcecol    = "906"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Sweden_epidemiology"
+    sourcecol    = "907"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Swine"
+    sourcecol    = "908"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Syndrome"
+    sourcecol    = "909"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Systole"
+    sourcecol    = "910"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Tamoxifen_adverse_effects_therapeutic_use"
+    sourcecol    = "911"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Task_Performance_and_Analysis"
+    sourcecol    = "912"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Taxoids"
+    sourcecol    = "913"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Television"
+    sourcecol    = "914"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Terminal_Care"
+    sourcecol    = "915"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Terminology"
+    sourcecol    = "916"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Texas"
+    sourcecol    = "917"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Thrombocytopenia_chemically_induced"
+    sourcecol    = "918"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Thrombosis_prevention___control"
+    sourcecol    = "919"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Tibia_surgery"
+    sourcecol    = "920"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Time"
+    sourcecol    = "921"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Time_Factors"
+    sourcecol    = "922"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Tissue_Distribution"
+    sourcecol    = "923"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Tissue_Donors"
+    sourcecol    = "924"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Tobacco_Industry"
+    sourcecol    = "925"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Tomography__Emission_Computed"
+    sourcecol    = "926"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Tomography__X_Ray_Computed"
+    sourcecol    = "927"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Total_Quality_Management_organization___administration"
+    sourcecol    = "928"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Transfection"
+    sourcecol    = "929"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Transplantation__Autologous"
+    sourcecol    = "930"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Transplantation__Homologous"
+    sourcecol    = "931"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Trauma_Centers"
+    sourcecol    = "932"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Treatment_Failure"
+    sourcecol    = "933"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Treatment_Outcome"
+    sourcecol    = "934"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Treatment_Refusal"
+    sourcecol    = "935"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Triglycerides_blood"
+    sourcecol    = "936"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Truth_Disclosure"
+    sourcecol    = "937"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Tumor_Markers__Biological_analysis"
+    sourcecol    = "938"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Tumor_Markers__Biological_blood"
+    sourcecol    = "939"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Twins"
+    sourcecol    = "940"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Ultrasonography__Prenatal"
+    sourcecol    = "941"
+    valuetype    = "real"/>
+  <attribute
+    name         = "United_States"
+    sourcecol    = "942"
+    valuetype    = "real"/>
+  <attribute
+    name         = "United_States_epidemiology"
+    sourcecol    = "943"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Up_Regulation"
+    sourcecol    = "944"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Urban_Health"
+    sourcecol    = "945"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Vaccination"
+    sourcecol    = "946"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Vaginal_Smears"
+    sourcecol    = "947"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Valproic_Acid_therapeutic_use"
+    sourcecol    = "948"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Vascular_Endothelial_Growth_Factor_A"
+    sourcecol    = "949"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Vascular_Endothelial_Growth_Factors"
+    sourcecol    = "950"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Vascular_Surgical_Procedures"
+    sourcecol    = "951"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Vasodilation"
+    sourcecol    = "952"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Vasodilator_Agents_administration___dosage"
+    sourcecol    = "953"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Vasodilator_Agents_pharmacology_therapeutic_use"
+    sourcecol    = "954"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Vasodilator_Agents_therapeutic_use"
+    sourcecol    = "955"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Venous_Thrombosis_drug_therapy"
+    sourcecol    = "956"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Ventricular_Function__Left_drug_effects"
+    sourcecol    = "957"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Ventricular_Function__Left_physiology"
+    sourcecol    = "958"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Verbal_Behavior"
+    sourcecol    = "959"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Veterans_psychology"
+    sourcecol    = "960"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Vital_Capacity"
+    sourcecol    = "961"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Vital_Capacity_physiology"
+    sourcecol    = "962"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Waiting_Lists"
+    sourcecol    = "963"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Wales_epidemiology"
+    sourcecol    = "964"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Walking"
+    sourcecol    = "965"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Walking_physiology"
+    sourcecol    = "966"
+    valuetype    = "real"/>
+  <attribute
+    name         = "War"
+    sourcecol    = "967"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Washington"
+    sourcecol    = "968"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Weight_Gain"
+    sourcecol    = "969"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Weight_Lifting"
+    sourcecol    = "970"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Weight_Loss"
+    sourcecol    = "971"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Women_s_Health"
+    sourcecol    = "972"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Workload"
+    sourcecol    = "973"
+    valuetype    = "real"/>
+  <attribute
+    name         = "World_Health"
+    sourcecol    = "974"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Wound_Healing"
+    sourcecol    = "975"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Zidovudine_therapeutic_use"
+    sourcecol    = "976"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Biography"
+    sourcecol    = "977"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Case_Reports"
+    sourcecol    = "978"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Classical_Article"
+    sourcecol    = "979"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Clinical_Conference"
+    sourcecol    = "980"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Clinical_Trial"
+    sourcecol    = "981"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Clinical_Trial__Phase_II"
+    sourcecol    = "982"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Clinical_Trial__Phase_III"
+    sourcecol    = "983"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Comment"
+    sourcecol    = "984"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Comparative_Study"
+    sourcecol    = "985"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Comparative_Study_"
+    sourcecol    = "986"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Congresses"
+    sourcecol    = "987"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Consensus_Development_Conference"
+    sourcecol    = "988"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Editorial"
+    sourcecol    = "989"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Historical_Article"
+    sourcecol    = "990"
+    valuetype    = "real"/>
+  <attribute
+    name         = "In_Vitro_"
+    sourcecol    = "991"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Letter"
+    sourcecol    = "992"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Meta_Analysis"
+    sourcecol    = "993"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Multicenter_Study"
+    sourcecol    = "994"
+    valuetype    = "real"/>
+  <attribute
+    name         = "News"
+    sourcecol    = "995"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Randomized_Controlled_Trial"
+    sourcecol    = "996"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Research_Support__Non_U_S__Gov_t_"
+    sourcecol    = "997"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Research_Support__U_S__Gov_t__P_H_S__"
+    sourcecol    = "998"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Review"
+    sourcecol    = "999"
+    valuetype    = "real"/>
+  <attribute
+    name         = "Twin_Study"
+    sourcecol    = "1000"
+    valuetype    = "real"/>
+</attributeset>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tomcatProjectProperties>
+    <rootDir>/WebRoot</rootDir>
+    <exportSource>false</exportSource>
+    <reloadable>true</reloadable>
+    <redirectLogger>false</redirectLogger>
+    <updateXml>true</updateXml>
+    <warLocation>C:\apache-tomcat-5.5.26\webapps\SemMed.war</warLocation>
+    <extraInfo></extraInfo>
+    <webPath>/SemMed</webPath>
+</tomcatProjectProperties>

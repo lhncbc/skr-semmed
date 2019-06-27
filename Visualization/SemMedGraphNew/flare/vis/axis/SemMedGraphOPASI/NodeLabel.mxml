@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="{data.longName.length*13*app.scaleFactor+10}" height="30" borderStyle="inset" color="#000000" fontSize="12" fontFamily="Arial" borderColor="#004080" cornerRadius="13" themeColor="#004080">
+		 <mx:Script>
+        <![CDATA[
+            import mx.core.Application;
+            
+            [Bindable]
+            private var app: GraphApp = GraphApp(Application.application);
+                       
+        ]]>
+    </mx:Script>
+		 <mx:Label text="{data.longName}" scaleX="{app.scaleFactor}" 
+		 	scaleY="{app.scaleFactor}" width="{data.longName.length*12*app.scaleFactor}" id="caption" alpha="1.0" enabled="true" textAlign="center" color="#000000"/>
+</mx:VBox>

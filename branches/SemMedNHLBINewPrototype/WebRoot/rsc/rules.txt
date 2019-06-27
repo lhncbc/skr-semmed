@@ -1,0 +1,560 @@
+#Come up with meta statements and rule schema. This must then be instnatiated.
+
+# Define domain sets. These domains may change
+SET(Childhood):Child|School child|Youth|Adolescent|Adolescents, Female|Adolescents, Male|Boys|Girls|Infant;
+
+SET(Adulthood):Patients|Adult|Male population group|Woman|Young adult|Persons|Middle Aged|Human|Woman|Male population group;
+
+SET(Race_Ethnic_Geo):Ethnic group|Caucasians|White British|Hispanic Americans|Black race|Samoan (ethnic group)|African American|Pacific Islander Americans|Central American|Mexican|Inuits|Racial group|Latinos|Polynesians (ethnic group)| Minority Groups|Micronesians (ethnic group)|Mexican Americans|Hispanic Americans|Puerto Ricans|Native Americans|Latinas|Cuban|Asians|American;
+
+SET(Target_Population):Childhood|Adulthood;
+
+SET(No_Child):MINUS(Target_Population,Childhood);
+
+SET(No_Adult):MINUS(Target_Population,Adulthood);
+
+# These are the disorders factors. I don't need this line. I keep it  here just for my own documentation
+#(_Disorder):Atherosclerosis_Set|Cardiovascular_Disease_Set;
+
+SET(Atherosclerosis_Set):Atherosclerosis|Arteriosclerosis|Coronary Arteriosclerosis|Carotid Atherosclerosis|Endothelial dysfunction|Intima media thickness;
+
+SET(Cardiovascular_Disease_Set):Coronary heart disease|Coronary Arteriosclerosis|Heart Diseases|Myocardial Ischemia|Cardiovascular Diseases|Coronary artery calcification;
+
+# These are the risk factors. I don't need this line. I keep it  here just for my own documentation
+#(_RiskFactor):Obesity_Set|Hyperlipidemia_Set|Metabolic_Syndrome_Set|Diabetes_Mellitus_Set|Inflammation_Set;
+
+SET(Obesity_Set):Obesity|Overweight|Weight Gain;
+
+SET(Hyperlipidemia_Set):Hyperlipidemia|Hyperlipidemia, Familial Combined|hypercholesterolemia|Hypercholesterolemia, Familial|Dyslipidemias;
+
+SET(Metabolic_Syndrome_Set):Metabolic syndrome|Metabolic Syndrome X|insulin sensitivity;
+
+SET(Diabetes_Mellitus_Set):Diabetes|Diabetes Mellitus, Insulin-Dependent|Diabetes Mellitus|Diabetes Mellitus, Non-Insulin-Dependent;
+
+SET(Inflammation_Set):Inflammation;
+
+SET(Risk_Factor_Cluster_Set):Risk factor, cardiovascular|CORONARY ARTERY DISEASE RISK FACTORS;
+
+SET(Process_Set):PROCESS_OF|NEG_PROCESS_OF;
+
+SET(Location_Set):LOCATION_OF;
+
+SET(Organ_Set):Organ;
+
+SET(Damage_Set):Tissue damage|Injury;
+
+SET(Associated):PREDISPOSES|AFFECTS|COEXISTS_WITH;
+
+SET(Decrease):TREATS|PREVENTS|AFFECTS;
+
+SET(Sibutramine_Set):sibutramine;
+
+# Define predications and arguments to be used by rules.
+# rename these statement better. Especially, the ones that hold variables. It is very confusing as is.
+
+EXISTS(A1):subject(Atherosclerosis_Set),predicate(Process_Set),object(Childhood);
+
+DOESNOTEXISTS(A1.1):subject(Atherosclerosis_Set),predicate(Process_Set),object(No_Child);
+
+EXISTS(A2):subject(Atherosclerosis_Set),predicate(Process_Set),object(Adulthood);
+
+EXISTS(C(_RiskFactor)):subject(_RiskFactor),predicate(Associated),object(Atherosclerosis_Set);
+
+EXISTS(C.1(_RiskFactor)):subject(Atherosclerosis_Set),predicate(Associated),object(_RiskFactor);
+
+EXISTS(D0):predicate(Process_Set),object(Childhood);
+
+EXISTS(D(_RiskFactor)):subject(_RiskFactor),predicate(Process_Set),object(Childhood);
+
+DOESNOTEXISTS(D.1(_RiskFactor)):subject(_RiskFactor),predicate(Process_Set),object(No_Child);
+
+# Risk factor in general cluster not a variable
+EXISTS(D6):subject(Risk_Factor_Cluster_Set),predicate(Process_Set),object(Childhood);
+
+DOESNOTEXISTS(D6.1):subject(Risk_Factor_Cluster_Set),predicate(Process_Set),object(No_Child);
+
+EXISTS(E1(_RiskFactor)):predicate(Decrease),object(_RiskFactor);
+
+
+
+EXISTS(E2(_Disorder)):predicate(Decrease),object(_Disorder);
+
+# constant athreosclerosis there
+EXISTS(E3):predicate(Decrease),object(Atherosclerosis_Set);
+
+EXISTS(F):subject(Organ_Set),predicate(Location_Set),object(Damage_Set);
+
+EXISTS(G1(_Disorder)):subject(_Disorder),predicate(Process_Set),object(Childhood);
+
+EXISTS(G2(_Disorder)):subject(_Disorder),predicate(Process_Set),object(Adulthood);
+
+EXISTS(H0):predicate(Process_Set),object(Race_Ethnic_Geo);
+
+EXISTS(H1(_RiskFactor)):subject(_RiskFactor),predicate(Process_Set),object(Race_Ethnic_Geo);
+
+#Just added. for sibutramine
+######################################################################
+SET(TreatsAdmin):TREATS|ADMINISTERED_TO;
+
+EXISTS(S1):subject(Obesity_Set),predicate(Process_Set),object(Adulthood);
+
+DOESNOTEXISTS(S1.1):subject(Obesity_Set),predicate(Process_Set),object(No_Adult);
+
+EXISTS(S2):subject(Sibutramine_Set),predicate(Decrease),object(Obesity_Set);
+
+
+EXISTS(S3):subject(Sibutramine_Set),predicate(TreatsAdmin),object(Adulthood);
+#############################################################################
+
+
+
+
+
+
+#Rules
+# Rules by question type. Please refer to document in question type classification.
+# All question with component atherosclerosis-related target organ damage will retrieve few citations if ANY.  For explanations look at question classification document.
+
+RULE(1a):A1,A1.1;
+
+RULE(1b):A1,A1.1,F;
+
+RULE(2a):A1,A1.1,D(_RiskFactor),D.1(_RiskFactor)|A1,A1.1,C(_RiskFactor)|A1,A1.1,C.1(_RiskFactor)|D(_RiskFactor),D.1(_RiskFactor),C(_RiskFactor)|D(_RiskFactor),D.1(_RiskFactor),C.1(_RiskFactor);
+# The above rule can be an overkill and eliminate relevant citations including 17212598
+
+RULE(2b):A1,A1.1,D(_RiskFactor),D.1(_RiskFactor),F|A1,A1.1,C(_RiskFactor),F|A1,A1.1,C.1(_RiskFactor),F|D(_RiskFactor),D.1(_RiskFactor),C(_RiskFactor),F|D(_RiskFactor),D.1(_RiskFactor),C.1(_RiskFactor),F;
+
+# the predispose part is dangerous for the adults keep only Process_of
+RULE(3a):D(_RiskFactor),G2(_Disorder);
+
+RULE(3b):D(_RiskFactor),A2,F;
+
+RULE(4a):E3,D(_RiskFactor),D.1(_RiskFactor)|E1(_RiskFactor),A1,A1.1;
+
+RULE(4b):E3,D(_RiskFactor),D.1(_RiskFactor),F|E1(_RiskFactor),A1,A1.1,F;
+
+RULE(5a):E2(_Disorder),D(_RiskFactor)|E1(_RiskFactor),G1(_Disorder)|D(_RiskFactor),G2(_Disorder),E1(_RiskFactor)|D(_RiskFactor),G2(_Disorder),E2(_Disorder);
+
+RULE(5b):E3,D(_RiskFactor),F|E1(_RiskFactor),A1,F|D(_RiskFactor),A2,E1(_RiskFactor),F|D(_RiskFactor),A2,E3,F;
+
+# Two comments:
+# 1 - Maybe allow ethnics to be the argument of any predicate not only Process_of.
+# 2 - Now I have rule (X Process_Of Childhood (D0), Risk factor Process_of Race_Ethnic_Geo (H1(_RiskFactor))).
+
+RULE(6):D(_RiskFactor),H0|D0,H1(_RiskFactor);
+
+
+# This rules behaves better and uses a concept Risk factor, cardiovascular in relation to Child an only child
+RULE(7):D6,D6.1;
+
+
+#RULE(8):E1(_RiskFactor),D(_RiskFactor),D.1(_RiskFactor);
+
+
+
+
+EXISTS(W1):predicate(TreatsAdmin),object(Childhood);
+RULE(8):E1(_RiskFactor),D(_RiskFactor)|W1;
+
+
+
+# rules for adult
+# Define predications and arguments to be used by rules.
+# rename these statement better. Especially, the ones that hold variables. It is very confusing as is.
+
+EXISTS(D0.A):predicate(Process_Set),object(Adulthood);
+
+EXISTS(D.A(_RiskFactor)):subject(_RiskFactor),predicate(Process_Set),object(Adulthood);
+
+DOESNOTEXISTS(D.1.A(_RiskFactor)):subject(_RiskFactor),predicate(Process_Set),object(No_Adult);
+
+# Risk factor in general cluster not a variable
+EXISTS(D6.A):subject(Risk_Factor_Cluster_Set),predicate(Process_Set),object(Adulthood);
+
+DOESNOTEXISTS(D6.1.A):subject(Risk_Factor_Cluster_Set),predicate(Process_Set),object(No_Adult);
+
+RULE(6a):D.A(_RiskFactor),H0|D0.A,H1(_RiskFactor);
+
+
+# This rules behaves better and uses a concept Risk factor, cardiovascular in relation to Child an only child
+RULE(7a):D6.A,D6.1.A;
+
+
+RULE(8a):E1(_RiskFactor),D.A(_RiskFactor),D.1.A(_RiskFactor);
+
+# sibutramine question is apart from this guideline
+#########################
+RULE(9a):S2|S3;
+#########################
+
+
+# Production guideline questions
+
+# Cholesterol 1 : LDL-C question (L)
+#########################
+RULE(10a):L1,L6|L2,L6|L3,L6|L4,L6|L5,L6|L1,L3;
+#########################
+
+
+#  Additional SETS for for LDL question
+######################################  
+SET(Set_Hypercholesterolemia):hypercholesterolemia;
+
+#SET(Set_LDL_Interventions):atorvastatin|Hydroxymethylglutaryl-CoA Reductase Inhibitors|rosuvastatin|ezetimibe|Simvastatin|Pravastatin|Nicotinic Acid|Lipid-lowering therapy|fluvastatin|Lovastatin|mevastatin|itavastatin|Pravastatin;
+
+SET(Set_Lipid_Lowering):Lipid-lowering therapy;
+
+SET(Set_LDLC):LDL Cholesterol Lipoproteins|Low-Density Lipoproteins|Non-HDL cholesterol;
+
+SET(Set_Coronary_Heart_Disease):Coronary heart disease|Cardiovascular Diseases|Coronary Arteriosclerosis|Acute coronary syndrome|CARDIAC EVENT|Myocardial Ischemia|Atherosclerosis|Myocardial Infarction|Angina Pectoris|Peripheral Vascular Diseases;
+
+SET(TreatsAdmin):TREATS|ADMINISTERED_TO;
+
+SET(Uses_Set):USES;
+
+#  Additional PREDICATES for for LDL question
+######################################  
+
+EXISTS(L1):predicate(TreatsAdmin),object(Adulthood);
+
+EXISTS(L2):predicate(Decrease),object(Set_Coronary_Heart_Disease);
+
+EXISTS(L3):subject(Set_Hypercholesterolemia),predicate(Process_Set),object(Adulthood);
+
+EXISTS(L4):subject(Adulthood),predicate(Location_Set),object(Set_LDLC);
+
+EXISTS(L5):subject(Set_Lipid_Lowering),predicate(Uses_Set);
+
+EXISTS(L6):subject(Set_Coronary_Heart_Disease),predicate(Process_Set),object(Adulthood);
+
+######################################
+
+
+
+# Cholesterol: Residulal question (R)
+#########################
+RULE(11a):R1|R2|R3|R4|R5;
+#########################
+
+
+#  Additional SETS for for residual question
+######################################  
+
+SET(Set_Biomarkers):High Density Lipoprotein Cholesterol|Apolipoproteins B|Triglycerides|Apolipoprotein A-I|Total cholesterol|Non-HDL cholesterol|C-reactive protein|apolipoprotein B-48;
+
+SET(Set_Dyslipidemias):Dyslipidemias|Metabolic syndrome;
+
+SET(Treats):TREATS;
+
+SET(PredAssoc):PREDISPOSES|ASSOCIATED_WITH;
+
+
+#  Additional PREDICATES for for residual question
+################################################
+
+EXISTS(R1):predicate(Treats),object(Set_Dyslipidemias);
+
+EXISTS(R2):subject(Set_Biomarkers),predicate(PredAssoc),object(Set_Dyslipidemias);
+
+EXISTS(R3):subject(Set_Biomarkers),predicate(PredAssoc),object(Set_Coronary_Heart_Disease);
+
+EXISTS(R4):subject(Adulthood),predicate(Location_Set),object(Set_Biomarkers);
+
+EXISTS(R5):subject(Set_Dyslipidemias),predicate(Process_Set),object(Adulthood);
+
+######################################
+
+##############################################################################
+
+
+
+
+
+
+
+
+# Hyperetension: BP question 2 for outcomes (O)
+#########################
+RULE(12a):O1|O2|O3|O4;
+#########################
+
+
+#  Additional SETS for for hyperetension 2 BP outcomes question
+###########################################################
+
+SET(Set_Outcomes):Cerebrovascular accident|Cerebral Infarction|Ischemic stroke|Peripheral Vascular Diseases|Myocardial Infarction|Acute myocardial infarction|First myocardial infarction|Coronary heart disease|Heart failure|Cardiovascular morbidity|Transient Ischemic Attack|Cessation of life|CARDIAC EVENT|Acute myocardial infarction|Cardiovascular event|Unstable angina|Acute coronary syndrome|Kidney Failure, Chronic|End stage renal failure|Renal impairment|Renal Insufficiency;
+
+
+
+SET(Disrupts):DISRUPTS;
+
+
+#  Additional PREDICATES for  hyperetension 2 BP outcomes question
+################################################
+
+EXISTS(O1):predicate(Decrease),object(Set_Outcomes);
+
+EXISTS(O2):predicate(Disrupts),object(Set_Outcomes);
+
+EXISTS(O3):predicate(Location_Set),object(Set_Outcomes);
+
+EXISTS(O4):subject(Set_Outcomes),predicate(Process_Set),object(Adulthood);
+
+######################################
+
+##############################################################################
+
+
+
+# Hyperetension: BP question for outcomes and comparatives
+#########################
+RULE(13a):O1,C1|O2,C1|O3,C1|O4,C1;
+#########################
+
+
+#  Additional SETS for for hyperetension BP outcomes question
+###########################################################
+
+
+
+SET(Compared):compared_with;
+
+
+#  Additional PREDICATES for  hyperetension BP outcomes question
+################################################
+
+EXISTS(C1):predicate(Compared);
+
+
+######################################
+
+##############################################################################
+
+
+
+
+
+
+# Obesity: Diet question 9 rules (I)
+#########################
+RULE(14a):I1|I2|I3;
+#########################
+
+
+
+# Additional SETS for Obesity diet question 9 (I)
+###########################################################
+
+# question about including in the set  |dietary|diet|Dietary intake
+
+SET(Set_Diet):Diet, Carbohydrate-Restricted|Diet, Fat-Restricted|Reducing diet|Caloric Restriction|Fat diet|Increased protein diet|Very low energy diet|Fat controlled diet|Dietary restriction NOS|Diet, Protein-Restricted|Diet, Mediterranean|High monounsaturated fat diet|High carbohydrate diet|Health education - diet|dietary|Diet|Dietary intake;
+
+
+
+SET(Compared):compared_with;
+
+
+
+# Additional PREDICATES for Obesity diet question 9 (I)
+#############################################################
+
+EXISTS(I1):subject(Set_Diet),predicate(Decrease);
+
+EXISTS(I2):predicate(Compared),object(Set_Diet);
+
+EXISTS(I3):subject(Set_Diet),predicate(Compared);
+
+######################################
+
+##############################################################################
+
+
+
+
+
+# Lifestyle: lifestyle diet pattern question (P)
+#########################
+RULE(20a):I1,O1|I1,O2|I1,O3|I1,O4|I2,O1|I2,O2|I2,O3|I2,O4|I3,O1|I3,O2|I3,O3|I3,O4|I1,P1|I2,P1|I3,P1;    
+#########################
+
+
+
+# Additional SETS for lifestyle diet pattern question (P)
+###########################################################
+
+SET(Set_Interventions):Coronary revascularisation|Angioplasty|Stents;
+
+
+# Additional PREDICATES for  lifestyle diet pattern question (P)
+#############################################################
+
+EXISTS(P1):subject(Set_Interventions),predicate(Decrease);
+
+######################################
+
+##############################################################################
+
+
+
+# Risk assessment: Risk asessment 7 rules (K)
+#########################
+RULE(21a):K1|K2;
+#########################
+
+
+#  Additional SETS for Risk asessment 7 question (K)
+###########################################################
+
+
+SET(Set_Cardiovascular_Outcomes):Cerebrovascular accident|Myocardial Infarction|Coronary heart disease|Heart failure|Transient Ischemic Attack|Cessation of life|CARDIAC EVENT|Acute myocardial infarction|Cardiovascular event|Unstable angina|Cardiovascular Diseases|Acute coronary syndrome;
+
+SET(Set_Cardiovascular_Risk_Factors):Obesity|Overweight|Weight Gain|Body mass index|Abdominal obesity|adiposity|Metabolic syndrome|Metabolic Syndrome X|insulin sensitivity|Diabetes|Diabetes Mellitus, Insulin-Dependent|Diabetes Mellitus|Diabetes Mellitus, Non-Insulin-Dependent|Hyperglycemia|Kidney Failure, Chronic|End stage renal failure|Kidney Failure|Renal impairment|Kidney Diseases|Renal Insufficiency|Hypertrophy, Left Ventricular|Risk factor, cardiovascular;
+
+
+
+
+#  Additional PREDICATES for  Risk asessment 7 question (K)
+################################################
+
+EXISTS(K1):subject(Set_Cardiovascular_Risk_Factors),predicate(Associated),object(Set_Cardiovascular_Outcomes);
+
+EXISTS(K2):subject(Set_Cardiovascular_Outcomes),predicate(Associated),object(Set_Cardiovascular_Risk_Factors);
+
+######################################
+
+##############################################################################
+
+
+
+# Obesity: Obesity BMI question 5 rules (OBMI)
+#########################
+RULE(15a):OBMI1|OBMI2,OBMI3;
+#########################
+
+
+#  Additional SETS for Obesity BMI question 5 (OBMI)
+###########################################################
+
+# I included Waist circumference and ration concepts, but took it away. The last two are to be used in the second rule
+SET(Set_BMI):Body mass index|Increased body mass index|Body mass index procedure|Waist-Hip Ratio|Body Composition|Waist circumference;
+
+
+SET(Set_BMI_Outcomes):Hypertensive disease|Essential Hypertension|Systolic blood pressure|Cerebrovascular accident|Cerebral Infarction|Myocardial Infarction|First myocardial infarction|Coronary heart disease|Heart failure|Transient Ischemic Attack|Cessation of life|CARDIAC EVENT|Acute myocardial infarction|Cardiovascular event|Unstable angina|Myocardial Ischemia|Cardiovascular Diseases|Acute coronary syndrome|Diabetes|Diabetes Mellitus|Diabetes Mellitus, Non-Insulin-Dependent|Risk factor, cardiovascular|Coronary Arteriosclerosis;
+
+SET(Predicts):PREDISPOSES|AFFECTS|DIAGNOSES|NEG_PREDISPOSES|NEG_AFFECTS|NEG_DIAGNOSES;
+
+SET(Property):PROPERTY_OF;
+
+
+
+#  Additional PREDICATES for  Obesity BMI question 5 (OBMI)
+################################################
+
+EXISTS(OBMI1):subject(Set_BMI),predicate(Predicts),object(Set_BMI_Outcomes);
+
+EXISTS(OBMI2):subject(Set_BMI),predicate(Property);
+
+EXISTS(OBMI3):subject(Set_BMI_Outcomes),predicate(Process_Set),object(Adulthood);
+
+
+######################################
+
+##############################################################################
+
+
+
+
+
+
+
+# Lifestyle: diet fat question 2bi rules (LDIFAT)
+#########################
+RULE(22a):LDIFAT1|LDIFAT2,LDIFAT3;
+#########################
+
+
+#  Additional SETS Lifestyle: diet fat question 2bi rules (LDIFAT)
+###########################################################
+
+SET(Set_Diet_Fat):Trans Fats|Trans Fatty Acids|Fatty Acids|Fatty acid glycerol esters|Fatty Acids, Omega-3|N-3 fatty acid intake|N-3 fatty acid supplementation|Long chain fatty acid|Fatty Acids, Saturated|Fatty Acids, Unsaturated|Dietary fat intake|Dietary Fats|Saturated fat intake|saturated fat|Dairy Products|Milk intake|MILK FAT|Fats, Unsaturated|Polyunsaturated Fatty Acids|Polyunsaturated vegetable oil|Oils, Unsaturated|Fish intake|Fish Oils|Eicosapentaenoic Acid|Docosahexaenoic Acids|Alpha linolenic acid intake|alpha-Linolenic Acid|Linolenic Acid|Linoleic Acid|margaric acid|Cholesterol, Dietary;
+
+# question mark to use or not 'Cardiovascular Diseases' If use expect more FP but higher recall
+
+SET(Set_Diet_Fat_Outcomes):Cerebrovascular accident|Cerebral Infarction|Ischemic stroke|Transient Ischemic Attack|Myocardial Infarction|Acute myocardial infarction|First myocardial infarction|Thrombotic infarction|Coronary heart disease|Coronary Arteriosclerosis|Heart failure|Cessation of life|Death, Sudden, Cardiac|Death, Sudden|CARDIAC EVENT|Cardiovascular event|Unstable angina|Myocardial Ischemia|Acute coronary syndrome|Ventricular Fibrillation|Ventricular arrhythmia;
+
+
+SET(Related):PREDISPOSES|AFFECTS|ASSOCIATED_WITH|CAUSES|TREATS|PREVENTS|DISRUPTS|NEG_PREDISPOSES|NEG_AFFECTS|NEG_ASSOCIATED_WITH|NEG_CAUSES|NEG_TREATS|NEG_PREVENTS|NEG_DISRUPTS;
+
+SET(DecreaseWithNegation):TREATS|PREVENTS|AFFECTS|NEG_TREATS|NEG_PREVENTS|NEG_AFFECTS;
+
+
+
+#  Additional PREDICATES Lifestyle: diet  fat question 2bi rules (LDIFAT)
+################################################
+
+EXISTS(LDIFAT1):subject(Set_Diet_Fat),predicate(Related),object(Set_Diet_Fat_Outcomes);
+
+EXISTS(LDIFAT2):subject(Set_Diet_Fat),predicate(DecreaseWithNegation);
+
+EXISTS(LDIFAT3):subject(Set_Diet_Fat_Outcomes),predicate(Process_Set),object(Adulthood);
+
+
+######################################
+
+##############################################################################
+
+
+
+
+
+
+# Risk assessment: Risk asessment 1 rules (RALONG)
+#########################
+RULE(18a):RALONG1|RALONG2|RALONG3,RALONG4;
+#########################
+
+
+#  Additional SETS for Risk asessment 1 question (RALONG)
+###########################################################
+
+
+SET(Set_Long_Outcome):Cerebrovascular accident|Cerebral Infarction|Ischemic stroke|Transient Ischemic Attack|Myocardial Infarction|Acute myocardial infarction|First myocardial infarction|Coronary heart disease|Peripheral Vascular Diseases|Heart failure|Cessation of life|CARDIAC EVENT|Acute myocardial infarction|Cardiovascular event|Acute coronary syndrome|Cardiovascular Diseases|Cardiovascular morbidity;
+
+
+# My 8 papers will we get them? 15219502(Yes) 16461820(No) 17088464(Yes) 18212285(NO) 17478150(NO) 18342687(Yes) 17916661(NO) 17615182(NO)
+# I had to add "Coronary heart disease" here, because some circular predications were useful X PREDISPOSES X in these above. 
+
+SET(Set_Long_Risk):Metabolic syndrome|Metabolic Syndrome X|insulin sensitivity|Diabetes|Diabetes Mellitus, Insulin-Dependent|Diabetes Mellitus|Diabetes Mellitus, Non-Insulin-Dependent|Smoking|Cigarette Smoking|Smoking Status|Hypertensive disease|Essential Hypertension|Systemic arterial pressure|Systolic blood pressure|Risk factor, cardiovascular|Alcohol consumption|Pattern of drinking alcohol|Weight for height|Coronary heart disease;
+
+
+SET(Predisposes):PREDISPOSES|NEG_PREDISPOSES;
+
+
+
+
+#  Additional PREDICATES for  Risk asessment 1 question (RALONG)
+################################################
+
+EXISTS(RALONG1):subject(Set_Long_Risk),predicate(Predisposes),object(Set_Long_Outcome);
+
+EXISTS(RALONG2):subject(Set_Long_Outcome),predicate(Predisposes),object(Set_Long_Risk);
+
+# Maybe add PROCESS_OF ANDed (both must appear in the same citation) if results are not good. For now leave comment on.
+
+EXISTS(RALONG3):subject(Set_Long_Risk),predicate(Process_Set),object(Adulthood);
+
+EXISTS(RALONG4):subject(Set_Long_Outcome),predicate(Process_Set),object(Adulthood);
+
+
+######################################
+
+##############################################################################
+
+
+
+
+# Same rules as question 1 rules
+# Cholesterol 8 : LDL question 2 
+#########################
+RULE(10a):L1,L6|L2,L6|L3,L6|L4,L6|L5,L6|L1,L3;
+#########################

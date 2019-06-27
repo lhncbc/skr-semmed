@@ -1,0 +1,2363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:fc="http://www.adobe.com/2006/fc"
+	xmlns:graph="semmed.*"
+    layout="absolute" creationComplete="startUp()" width="100%" xmlns:ns1="com.flashlit.shared.component.*" enterState="myGraph.unglow()">
+	 <mx:states>
+	 	 <mx:State name="citation">
+	 	 	 <mx:AddChild position="lastChild">
+	 	 	 	 <mx:Canvas y="100" width="800" height="80%" horizontalCenter="0">
+	 	 	 	 	 <mx:Panel x="0" y="0" width="100%" height="100%" layout="absolute" title="Citations"  addedEffect="{fadeIn}" removedEffect="{fadeOut}" showEffect="{fadeIn}" hideEffect="{fadeOut}">
+	 	 	 	 	 	 <mx:Button label="Close" right="10" bottom="10" click="currentState=''"/>
+	 	 	 	 	 	 <mx:VBox x="10" y="10" width="868" height="469" bottom="40" left="10" right="10" top="10" autoLayout="true" id="citationsVbox">
+
+							 <!--
+	 	 	 	 	 	 	 <mx:TextArea width="100%" height="100%" id="citationsText" wordWrap="true" editable="true" enabled="true"/>
+							 -->
+
+	 	 	 	 	 	 </mx:VBox>
+	 	 	 	 	 </mx:Panel>
+	 	 	 	 </mx:Canvas>
+	 	 	 </mx:AddChild>
+	 	 	 <mx:SetProperty target="{myGraph}" name="enabled" value="false"/>
+	 	 </mx:State>
+	 	 <mx:State name="relevant">
+	 	 	 <mx:SetProperty target="{vbox1}" name="width" value="50%"/>
+	 	 	 <mx:AddChild relativeTo="{accordion1}" position="before">
+				 <mx:VBox width="30%" height="100%">
+					 <mx:VDividedBox width="100%" height="100%">
+						<mx:VBox width="100%" height="50%">
+								 <mx:HBox width="50%">
+								    <mx:RadioButton label="Relevant Citations" id="relevantRadio" selected="true" groupName="relevantNonRelevantGroup" click="filter(false);centerOnVisible();deselectAll()"/>
+									<mx:Button label="Save To File" id="saveButton" click="saveFile()"/>
+									</mx:HBox>
+							     <mx:List  width="100%" height="100%"  dragEnabled="true" dropEnabled="true" allowMultipleSelection="true"
+								dragMoveEnabled="true" id="relevantList" dataProvider="{relevants.citation}" updateComplete="filter(false);centerOnVisible()" horizontalScrollPolicy="on"
+								doubleClickEnabled="true"  itemRenderer="TitleRenderer"></mx:List>
+						 </mx:VBox>
+						 <mx:VBox width="100%" height="50%">
+							 <mx:RadioButton label="Non-Relevant Citations" id="nonRelevantRadio" groupName="relevantNonRelevantGroup" click="filter(false);centerOnVisible();deselectAll()"/>
+							 <mx:List width="100%" height="100%" dragEnabled="true" dropEnabled="true"
+								allowMultipleSelection="true"   updateComplete="filter(false);centerOnVisible()" dragMoveEnabled="true" id="nonRelevantList"
+								dataProvider="{nonRelevants.citation}" creationComplete="addListener()" horizontalScrollPolicy="on" doubleClickEnabled="true"
+								itemRenderer="TitleRenderer"></mx:List>
+						 </mx:VBox>
+					 </mx:VDividedBox>
+
+					 <mx:RadioButton label="All Citations" id="allRadio" selected="false" groupName="relevantNonRelevantGroup"/>
+
+				 </mx:VBox>
+	 	 	 </mx:AddChild>
+	 	 </mx:State>
+		 <mx:State name="relevantCitation" basedOn="relevant">
+	 	 	 <mx:AddChild position="lastChild">
+	 	 	 	 <mx:Canvas y="100" width="800" height="80%" horizontalCenter="0">
+	 	 	 	 	 <mx:Panel x="0" y="0" width="100%" height="100%" layout="absolute" title="Citations">
+	 	 	 	 	 	 <mx:Button label="Close" right="10" bottom="10" click="currentState='relevant'"/>
+	 	 	 	 	 	 <mx:VBox x="10" y="10" width="868" height="469" bottom="40" left="10" right="10" top="10" autoLayout="true" id="relevantCitationsVbox">
+
+							 <!--
+	 	 	 	 	 	 	 <mx:TextArea width="100%" height="100%" id="relevantCitationsText" wordWrap="true" editable="true" enabled="true"/>
+							 -->
+	 	 	 	 	 	 </mx:VBox>
+	 	 	 	 	 </mx:Panel>
+	 	 	 	 </mx:Canvas>
+	 	 	 </mx:AddChild>
+	 	 </mx:State>
+		 <mx:State name="no_results">
+			 <mx:RemoveChild target="{mainBox}"/>
+			 <mx:AddChild position="lastChild">
+				 <mx:Panel x="0" y="0" height="100%" width="100%" title="Error">
+					 <mx:Label text="There seems to be no data to visualize. Please press the 'Visualize' button." x="20" y="20"/>
+				 </mx:Panel>
+			 </mx:AddChild>
+		 </mx:State>
+	 </mx:states>
+	 <mx:Style>
+        .text {
+            color: #222222;
+            font-family: Verdana;
+        }
+    </mx:Style>
+
+
+	<mx:Fade id="fadeOut" duration="1000" alphaFrom="1.0" alphaTo="0.0"/>
+    <mx:Fade id="fadeIn" duration="1000" alphaFrom="0.0" alphaTo="1.0"/>
+
+
+    <mx:HTTPService id="service"/>
+    <mx:HTTPService id="relevantDocuments"/>
+	<mx:HTTPService id="citations"/>
+
+	<mx:Script>
+
+		<![CDATA[
+			import flare.animate.interpolate.PointInterpolator;
+			import mx.collections.ListCollectionView;
+			import mx.collections.ArrayCollection;
+			import mx.controls.HRule;
+			import mx.controls.CheckBox;
+			import mx.controls.Menu;
+			import flare.vis.data.EdgeSprite;
+			import flare.vis.data.NodeSprite;
+			import mx.controls.TextArea;
+			import mx.core.UIComponent;
+			import mx.events.DragEvent;
+			import mx.events.ListEvent;
+			import mx.controls.Alert;
+			import mx.controls.HSlider;
+			import mx.events.SliderEvent;
+			import mx.controls.sliderClasses.Slider;
+
+			import semmed.NodeData;
+			import semmed.GraphVisualizer;
+			import semmed.EdgeRenderer;
+			import semmed.NodeRenderer;
+			import semmed.SeedNodeRenderer;
+			// import flare.vis.data.render.ShapeRenderer;
+			import flare.util.Sort;
+			import flare.vis.util.Shapes;
+
+			import mx.rpc.events.ResultEvent;
+			import flash.events.MouseEvent;
+			import flash.geom.Point;
+			import mx.events.MenuEvent;
+			// import flash.filesystem.*;
+			import flash.text.TextField;
+			import flash.ui.ContextMenu;
+			import flash.ui.ContextMenuItem;
+
+    		public  var myfile:FileReference;
+    		public  var saveFileRef:FileReference;
+
+			public var draggingWhole:Boolean = false;
+			public var draggingLittle:Boolean = false;
+
+
+			[Bindable]
+			public var zoom:Number=1.0;
+
+			[Bindable]
+            public var layoutOptions: Array = [
+	           // {label:"Spring", data:0},
+			   // {label:"Node-Link Tree", data:1},
+			   {label:"Circle", data:0 },
+			   {label:"Radial",data:1}];
+
+			[Bindable]
+			public var linkOptions: Array = [
+				{label:"UMLS"},
+				{label:"EntrezGene"},
+				{label:"OMIM"},
+				{label:"GHR"}];
+
+            private var selectedCitations :String;
+
+            private var selectedText :Array;
+
+            private var currentPos:Object = {x:0,y:0};
+
+            private var predicates:Array;
+
+            private var semTypes:Array;
+
+            private var clusterMeanings:Array;
+
+            private var predicateFilters:Array;
+
+            private var clusterFilters:Array;
+
+			private var semtypeFilters:Array;
+
+			private var edgeFilters:Array;
+
+            private var seed:Object;
+
+            private var xmlInput:Object;
+
+			private var alreadyRendered:String;
+			private var oldCenter:Point;
+
+			private var firstTime=true;
+
+			private var showingRelevantCitation:Boolean;
+
+			private var cNum:Number = 0;
+
+			private var directionLabel:Label = new Label();
+
+			private var cnoPredLabel:Label = new Label();
+
+			private var noPredLabel:Label = new Label();
+
+			private var cnoCiteLabel:Label = new Label();
+
+			private var noCiteLabel:Label = new Label();
+
+			private var citeBtn:Button = new Button();
+
+			private var nodeNum:Number = 0;
+
+			private var nodeConnectList:Array;
+
+			private var allNodesUsed:Boolean = true;
+			private var highConnectivityNodes:Array;
+			private var highConnectivityCount:Number=0;
+			private var clNum:Number = 0;
+
+            [Bindable]
+            public var relevants:Object;
+
+            [Bindable]
+            public var nonRelevants:Object;
+
+			[Bindable]
+			public var searchedConcepts:Array;
+
+			private var clusterColor:Array = ["00FFFF", "0000FF","FFA500","800080","008000", "CC00FF", "993300", "000033", "330000", "6699CC", "990000"];
+			// ("Blue", "Orange", "Purple", "Green")
+
+			private var numOfCluster:Number = 0;
+
+			public function startUp():void
+			{
+				service.addEventListener("result",infoCallback);
+				service.url="../servlet/RetrieveGraph?key="+Application.application.parameters.graphKey;
+				service.send();
+
+				// relevantDocuments.addEventListener(ResultEvent.RESULT,resultsCallback);
+				// relevantDocuments.url="../servlet/RetrieveGraph?doc=t&key="+Application.application.parameters.graphKey;
+                // relevantDocuments.send();
+
+                //relevantDocuments.send();
+                var myMenu:ContextMenu = new ContextMenu();
+				myMenu.hideBuiltInItems();
+
+				var saveCompleteGraphMenu:ContextMenuItem = new ContextMenuItem("save complete graph");
+				var saveVisibleGraphMenu:ContextMenuItem = new ContextMenuItem("save visible graph");
+				saveCompleteGraphMenu.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT, saveCompleteGraph);
+				saveVisibleGraphMenu.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT, saveVisibleGraph);
+				myMenu.customItems.push(saveCompleteGraphMenu);
+				myMenu.customItems.push(saveVisibleGraphMenu);
+				this.contextMenu = myMenu;
+			}
+
+			// public function retrieveTitles():void
+			// {
+				// import mx.rpc.http.HTTPService;
+				// var relevantDocuments:mx.rpc.http.HTTPService = new mx.rpc.http.HTTPService();
+				// relevantDocuments.addEventListener(ResultEvent.RESULT,retrieveTitleCallback);
+				// relevantDocuments.url="../servlet/RetrieveGraph?doc=t&key="+Application.application.parameters.graphKey;
+                // relevantDocuments.send();
+			// }
+
+			public function saveCompleteGraph(event:ContextMenuEvent):void {
+        		import mx.rpc.http.HTTPService;
+        		var uploadRelevantDocuments:mx.rpc.http.HTTPService = new mx.rpc.http.HTTPService();
+        		var nodeString:String = null;
+        		var edgeString:String = null;
+        		var graphString:String = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<graph alreadyRendered=\"yes\">\n";
+				var titleString:String;
+				var pmidString:String;
+				var params:Object = {};
+				graphString = graphString + "<graphPosition x=\"" + myGraph.x + "\" y=\"" + myGraph.y + "\" />\n";
+				graphString = graphString + "<graphZoom x=\"" + myGraph.scaleX + "\" y=\"" + myGraph.scaleY + "\" />\n";
+				graphString = graphString + "<relationFilters>\n";
+				for each (var c:CheckBox in predicateFilters) {
+	            	if (c.selected)
+	            		graphString = graphString + "<relation id=\"\">" + c.label + "</relation>\n";
+				}
+				graphString = graphString + "</relationFilters>\n";
+				var clusterStringArray:Array = new Array();
+
+				for(var i:int=0; i < clNum; i++) {
+					var clString = new String("<cluster meaning=\"");
+					clString = clString + clusterMeanings[i] + "\">"
+					clusterStringArray.push(clString);
+				}
+				 for each (var n:NodeSprite in myGraph.dataF.nodes){
+						var newx:int = n.x;
+						var newy:int = n.y;
+						var clusters:Array = n.data.cluster.split("_");
+						for each(var cls:String in clusters) {
+							var cln:Number = Number(cls)-1;
+							var clusterThis:String = clusterStringArray[cln];
+							// nodeString = "<node id=\"" + n.data.CUI + "\" name=\"" + escapeHTML(n.data.name, null) + "\" semtype=\"" + n.data.semtype + "\" cluster=\"" + n.data.cluster + "\" visible=\"" + n.visible  + "\" color=\"" + intToHex(n.trueFillColor) + "\" x=\"" + newx + "\" y = \"" + newy + "\"";
+							clusterThis = clusterThis + "\n<node id=\"" + n.data.CUI + "\" name=\"" + escapeHTML(n.data.name, null) + "\" semtype=\"" + n.data.semtype + "\" visible=\"" + n.visible  + "\" color=\"" + intToHex(n.trueFillColor) + "\" x=\"" + newx + "\" y = \"" + newy + "\"";
+							if(n.data.umlks)
+								clusterThis = clusterThis + " umlsks_url=\"" + escapeHTML(n.data.umlks, null) + "\"";
+							if(n.data.ghr)
+								clusterThis = clusterThis + " ghr_url=\"" + escapeHTML(n.data.ghr, null) + "\"";
+							if(n.data.omim)
+								clusterThis = clusterThis + " omim_url=\"" + escapeHTML(n.data.omim, null) + "\"";
+							if(n.data.entrez)
+								clusterThis = clusterThis + " entrezgene_url=\"" + escapeHTML(n.data.entrez, null) + "\"/>\n";
+							else
+								clusterThis = clusterThis + "/>\n";
+
+							clusterStringArray[cln] = clusterThis;
+						}
+				}
+
+
+				for each (var e:EdgeSprite in myGraph.allEdges){
+							var edgeVisible:Boolean = false;
+							for each (var c:CheckBox in predicateFilters) {
+	            				if (c.selected == true && c.label == e.data.predicate) {
+	            					edgeVisible = true;
+	            					break;
+	            				}
+							}
+							var clusters:Array = e.data.cluster.split("_");
+							for each(var cls:String in clusters) {
+								var cln:Number = Number(cls)-1;
+								var clusterThis:String = clusterStringArray[cln];
+								if(edgeVisible == false)
+									clusterThis = clusterThis + "<edge source=\"" + e.data.subjectCUI + "\" target=\"" + e.data.targetCUI + "\" label=\"" + e.data.predicate + "\" color=\"" + intToHex(e.fillColor) +  "\" visible = \"false\" >";
+								else
+									clusterThis = clusterThis + "<edge source=\"" + e.data.subjectCUI + "\" target=\"" + e.data.targetCUI + "\" label=\"" + e.data.predicate + "\" color=\"" + intToHex(e.fillColor) + "\" >";
+								var citations:Array = e.data.citation.split(",");
+								var citnum:Number = 0;
+								for each (var s:String in e.data.sentences) {
+									clusterThis = clusterThis + "<sentence id = \"" + citations[citnum] + ".ab.n\" text = \"" + regexp(escapeHTML(s, null)) + "\"/>";
+									citnum = citnum+1;
+								}
+								clusterThis = clusterThis + "</edge>\n";
+								clusterStringArray[cln] = clusterThis;
+								// graphString = graphString + edgeString;
+							}
+				}
+
+				for(var i:int =0; i < clNum; i++) {
+					graphString = graphString + clusterStringArray[i] + "\n</cluster>";
+				}
+				graphString = graphString + "\n</graph>";
+				// params["uploadString"] =  graphString + "\n</graph>";
+				// uploadRelevantDocuments.addEventListener(MouseEvent.CLICK,saveGraphCallBack);
+				// uploadRelevantDocuments.url="../servlet/RetrieveGraph";
+				// uploadRelevantDocuments.method = "POST";
+				// uploadRelevantDocuments.send(params);
+				var fileName:String = "graph.xml";
+				saveFileRef = new FileReference();
+				saveFileRef.addEventListener(Event.SELECT, onSaveFileSelected);
+				saveFileRef.save(graphString,fileName);
+			}
+
+			public function saveVisibleGraph(event:ContextMenuEvent):void {
+        		import mx.rpc.http.HTTPService;
+        		var uploadRelevantDocuments:mx.rpc.http.HTTPService = new mx.rpc.http.HTTPService();
+        		var nodeString:String = null;
+        		var edgeString:String = null;
+        		var graphString:String = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<graph alreadyRendered=\"yes\">\n";
+				var titleString:String;
+				var pmidString:String;
+				var params:Object = {};
+				graphString = graphString + "<graphPosition x=\"" + myGraph.x + "\" y=\"" + myGraph.y + "\" />\n";
+				graphString = graphString + "<graphZoom x=\"" + myGraph.scaleX + "\" y=\"" + myGraph.scaleY + "\" />\n";
+				graphString = graphString + "<relationFilters>\n";
+				for each (var c:CheckBox in predicateFilters) {
+	            	if (c.selected)
+	            		graphString = graphString + "<relation id=\"\">" + c.label + "</relation>\n";
+				}
+				graphString = graphString + "</relationFilters>\n";
+				for each (var n:NodeSprite in myGraph.dataF.nodes){
+					if(n.visible == true) {
+						var newx:int = n.x;
+						var newy:int = n.y;
+						nodeString = "<node id=\"" + n.data.CUI + "\" name=\"" + escapeHTML(n.data.name, null) + "\" semtype=\"" + n.data.semtype + "\" color=\"" + intToHex(n.trueFillColor) + "\" x=\"" + newx + "\" y = \"" + newy + "\"";
+						if(n.data.umlks)
+							nodeString = nodeString + " umlsks_url=\"" + escapeHTML(n.data.umlks, null) + "\"";
+						if(n.data.ghr)
+							nodeString = nodeString + " ghr_url=\"" + escapeHTML(n.data.ghr, null) + "\"";
+						if(n.data.omim)
+							nodeString = nodeString + " omim_url=\"" + escapeHTML(n.data.omim, null) + "\"";
+						if(n.data.entrez)
+							nodeString = nodeString + " entrezgene_url=\"" + escapeHTML(n.data.entrez, null) + "\"/>\n";
+						else
+							nodeString = nodeString + "/>\n";
+						graphString = graphString + nodeString;
+					}
+				}
+
+
+				for each (var e:EdgeSprite in myGraph.dataF.edges){
+							var edgeVisible:Boolean = false;
+							for each (var c:CheckBox in predicateFilters) {
+	            				if (c.selected == true && c.label == e.data.predicate) {
+	            					edgeVisible = true;
+	            					break;
+	            				}
+							}
+							edgeString = "<edge source=\"" + e.data.subjectCUI + "\" target=\"" + e.data.targetCUI + "\" label=\"" + e.data.predicate + "\" color=\"" + intToHex(e.fillColor) + "\" >";
+							var citations:Array = e.data.citation.split(",");
+							var citnum:Number = 0;
+							for each (var s:String in e.data.sentences) {
+								edgeString = edgeString + "<sentence id = \"" + citations[citnum] + ".ab.n\" text = \"" + regexp(escapeHTML(s, null)) + "\"/>";
+								citnum = citnum+1;
+							}
+							edgeString = edgeString + "</edge>\n";
+							// graphString = graphString + edgeString;
+							graphString = graphString + edgeString;
+				}
+				graphString = graphString + "\n</graph>";
+				// params["uploadString"] =  graphString + "\n</graph>";
+				// uploadRelevantDocuments.addEventListener("result",saveGraphCallBack);
+				// uploadRelevantDocuments.url="../servlet/RetrieveGraph";
+				// uploadRelevantDocuments.method = "POST";
+				// uploadRelevantDocuments.send(params);
+				var fileName:String = "graph.xml";
+				saveFileRef = new FileReference();
+				saveFileRef.addEventListener(Event.SELECT, onSaveFileSelected);
+				saveFileRef.save(graphString,fileName);
+			}
+
+
+			private function saveGraphCallBack(event:ResultEvent):void {
+    			import flash.system.Security;
+    			var urlstring:String = String(event.result);
+    			if (urlstring == null) {
+					noResults();
+					return}
+				Security.allowDomain("*");
+				trace(urlstring);
+    			myfile = new FileReference();
+    			configureListeners(myfile);
+    			var downloadURL:URLRequest;
+        		var fileName:String = "graph.xml";
+    			downloadURL = new URLRequest();
+            	downloadURL.url = urlstring;
+            	myfile.download(downloadURL, fileName);
+			 }
+
+			private function nodeClick(evt:MouseEvent):void{
+
+			}
+
+			//interprets lists of relevant and nonrelevant citations
+			private function resultsCallback(event:ResultEvent):void {
+
+				relevants = event.result.citations.relevants;
+				nonRelevants = 	event.result.citations.nonrelevants;
+
+				// Commented out for SemMed visulization since they don't have relevant/nonrelevant title list
+				// if (!relevants && !nonRelevants)
+				//	relevantButton.enabled = false;
+
+				if (relevants==null)
+					relevants = new Object();
+				if (nonRelevants==null)
+					nonRelevants = new Object();
+			}
+
+			//interprets graph xml
+			private function infoCallback(event:ResultEvent) : void{
+
+            	// var xml:XML = new XML(event.result);
+            	var xml:Object = event.result;
+            	// xmlInput = event.result;
+			    // Alert.show('In infoCallback()', 'Alert Box', mx.controls.Alert.OK);
+				if (xml == null) {
+					noResults();
+					return;
+				}else if (xml.graph==null) {
+					noResults();
+					return;
+				}
+				// if(xml.graph.hasOwnProperty("alreadyRendered"))
+				//	alreadyRendered = "yes";
+				// else
+				//	alreadyRendered = "no";
+				seed = {name:xml.graph.seed.value,node:null};
+				// Alert.show(seed.name),
+
+				semTypes = new Array();
+				// Alert.show('Read nodes', 'Alert Box', mx.controls.Alert.OK);
+
+				if (xml.graph.cluster.hasOwnProperty("meaning")) {
+	               	var numOfNodes:Number = 0;
+	               	// Alert.show("loadNode for Single cluster");
+	               	for each(var node:Object in xml.graph.cluster.node) {
+	          		 	// Alert.show(node.name);
+	          		 	numOfNodes++;
+	          		 	loadNode(node,semTypes, 1);
+	               	}
+	               	// Alert.show("End of loadNode for Single cluster");
+				}else {
+					var clnodeNum:Number = 0;
+					var numOfNodes:Number = 0;
+	   				for each(var cluster:Object in xml.graph.cluster) {
+	   			   		clnodeNum++;
+	   			   		for each(var node:Object in cluster.node) {
+	          		 		// Alert.show('node level 2', 'Alert Box', mx.controls.Alert.OK);
+	          		 		numOfNodes++;
+	          		 		loadNode(node,semTypes, clnodeNum);
+	          		 	}
+	               	}
+	            }
+				// Alert.show('Read edges 1', 'Alert Box', mx.controls.Alert.OK);
+	            predicates = new Array();
+	            clusterMeanings = new Array(); // Extract the semantic meaning for each cluster
+				var visibility:String = "visible";
+				// Alert.show('Read edges 2', 'Alert Box', mx.controls.Alert.OK);
+				if (xml.graph.cluster.hasOwnProperty("meaning")) {
+	               	clNum = 1;
+	               	 clusterMeanings.push(xml.graph.cluster.meaning);
+	               	for each(var edge:Object in xml.graph.cluster.edge) {
+	          		 	// Alert.show(edge.label);
+	          		 	loadEdge(edge, predicates, visibility, 1);
+	               	}
+				}else {
+          	    	for each(var cluster:Object in xml.graph.cluster){
+          	    		 // Alert.show(String(clNum));
+          	    		 clNum++;
+          	    		 clusterMeanings.push(cluster.meaning);
+          	    		 // Alert.show(clNum, 'Alert Box', mx.controls.Alert.OK);
+          	    		 for each(var edge:Object in cluster.edge) {
+          	    			// if(edge.hasOwnProperty("visible"))
+          	    			//	visibility = "invisible";
+          	    		 	// else
+          	    			//	visibility = "visible";
+          	    			// Alert.show(String(clNum), 'Alert Box', mx.controls.Alert.OK);
+          	    			loadEdge(edge, predicates, visibility, clNum);
+          	    		 }
+          	    	}
+          	    }
+
+	            var h:HRule = new HRule;
+	            var label:Label = new Label;
+ 				var savedRelationFilters:Array = new Array();
+				if(alreadyRendered == "yes") {
+					if(xml.graph.relationFilters.relation.hasOwnProperty("id"))
+						savedRelationFilters.push(xml.graph.relationFilters.relation);
+					else
+						for each(var rel:String in xml.graph.relationFilters.relation) {
+							savedRelationFilters.push(rel);
+						}
+				}
+				// Alert.show('infoCallBack step 3', 'Alert Box', mx.controls.Alert.OK);
+
+	            label.text = "Relations";
+	            form1.addChild(label);
+	            form1.addChild(h);
+
+	            predicateFilters = new Array();
+	            // Alert.show('infoCallBack step 4', 'Alert Box', mx.controls.Alert.OK);
+	            for(var k:int=0;k<predicates.length;k++){
+	            	var cb:CheckBox = new CheckBox();
+	            	filters.push(cb);
+	            	if(alreadyRendered == "yes") {
+	            		var relationFound:Boolean = false;
+	            		for each(var rel:String in savedRelationFilters) {
+	            			if(predicates[k].label == rel) {
+	            				relationFound = true;
+	            				break;
+	            			}
+	            		}
+	            		if(relationFound == true)
+	            			cb.selected = true;
+	            		else
+	            			cb.selected = false;
+	            	} else
+	            		cb.selected = true;
+
+	            	cb.label = predicates[k].label;
+	            	cb.setStyle("color", predicates[k].color);
+					cb.setStyle("fillColors", [predicates[k].color, 0xAAAAAA]);
+					cb.setStyle("fillAlphas", [1, 1]);
+	            	form1.addChild(cb);
+	            	predicateFilters.push(cb);
+	            	cb.addEventListener(MouseEvent.CLICK,function (event:MouseEvent):void{
+	            		filter();
+	            	});
+
+	            }
+
+	            var clh:HRule = new HRule;
+	            var cllabel:Label = new Label;
+	            cllabel.text = "Clusters";
+	            form1.addChild(cllabel);
+	            form1.addChild(clh);
+
+	            clusterFilters = new Array();
+	            for(var k:int=1;k<=clNum;k++){
+	            	var cc:CheckBox = new CheckBox();
+	            	cc.selected = true;
+
+	            	// cb.label = "cluster " + k;
+	            	// cc.label = String(k);
+	            	cc.label =  String(k) + "  (" + clusterMeanings[k-1] + ")";
+	            	// Alert.show(clusterMeanings[k]);
+	            	cc.setStyle("color", hexToInt(clusterColor[k]));
+					// cc.setStyle("fillColors", hexToInt(clusterColor[k]));
+					// cb.setStyle("fillAlphas", [1, 1]);
+	            	form1.addChild(cc);
+	            	clusterFilters.push(cc);
+	            	cc.addEventListener(MouseEvent.CLICK,function (event:MouseEvent):void{
+	            		// Alert.show(cb.label, 'Alert Box', mx.controls.Alert.OK);
+	            		filterCluster();
+	            	});
+	            }
+
+	            form1.addChild(new HRule());
+	            // label = new Label();
+	            //  label.text = "Semantic Types";
+	            // form1.addChild(label);
+	            // form1.addChild(new HRule());
+
+				/* semtypeFilters = new Array();
+	           	 for each(var sem:Object in semTypes){
+	           		var cb2:CheckBox = new CheckBox();
+	           		cb2.label = sem.semtype;
+	           		cb2.setStyle("color", sem.color);
+					cb2.setStyle("alpha", 1);
+					cb2.setStyle("fillColors",[sem.color, sem.color]);
+					cb2.setStyle("fillAlphas", [1, 1]);
+					cb2.selected = true;
+					//cb2.enabled = false;
+					semtypeFilters.push(cb2);
+	           		form1.addChild(cb2);
+					cb2.addEventListener(MouseEvent.CLICK,function (event:MouseEvent):void{
+	            		filter();
+	            	});
+	           	} */
+
+				highConnectivityNodes = new Array();
+				for each(var node2:NodeSprite in myGraph.dataF.nodes) {
+					if (node2.data.name == seed.name) {
+						seed.node = node2;
+						// break;
+					}
+					highConnectivityNodes.push(node2);
+				}
+                // Alert.show('infoCallBack step 5.1', 'Alert Box', mx.controls.Alert.OK);
+				myGraph.dataF.sort("fillColor", 2);
+				// Alert.show('infoCallBack step 5.2', 'Alert Box', mx.controls.Alert.OK);
+				// Alert.show("Step 1");
+				myGraph.loadData(alreadyRendered, numOfNodes);
+				// Alert.show('infoCallBack step 5.3', 'Alert Box', mx.controls.Alert.OK);
+				/* if(alreadyRendered == "yes") {
+					layoutChoose.selectedIndex = 4;
+				} */
+//				if (seed.node)
+//					trace("Your seed is " + seed.node.data.name);
+				myGraph.setRoot(seed.node);
+				// var clNum:Number = 0;
+				nodeConnectList = new Array();
+          	    for each(var n:Object in xml.graph.degreeList.node){
+          	       nodeConnectList.push({name:n.name,type:n.type,connectivity:n.connectivity});
+
+          	    }
+				 // if(alreadyRendered =="no")
+				 centerOnConcept(seed.node);
+
+				var sliderLabel:Label = new Label();
+	            sliderLabel.width = 200;
+				sliderLabel.text = "Number of nodes in graph";
+				// sliderLabel.move(170, 350);
+
+				var aSlider:HSlider = new HSlider();
+				// Alert.show("Step 3");
+
+				aSlider.width = 200;
+				aSlider.snapInterval = 2;
+				aSlider.tickInterval = 5;
+				aSlider.maximum = nodeNum;
+				aSlider.minimum = 0;
+				aSlider.value = nodeNum;
+				aSlider.addEventListener(SliderEvent.THUMB_RELEASE, sliderHandler);
+				hbox1.addChild(aSlider);
+				hbox1.addChild(sliderLabel);
+				myGraph.play();
+				myGraph.redraw();
+
+            }
+
+			private function enterFirstState():void {
+				//centerOnConcept(seed.node);
+				if (oldCenter)
+					moveToCenter(oldCenter.x, oldCenter.y,true);
+			}
+
+			private function centerOnVisible():void {
+				//if (!firstTime)
+				//	return;
+				/* if (seed.node && seed.node.visible) {
+					var n:NodeSprite = seed.node as NodeSprite;
+					trace("I'm centering on root");
+					moveToCenter(n.parent.x + n.x, n.parent.y + n.y, true);
+				}else */
+					for each(var node:NodeSprite in myGraph.dataF.nodes)
+						if (node.visible) {
+							trace("I'm centering on something");
+							moveToCenter(node.parent.x + node.x, node.parent.y + node.y, true);
+							break;
+						}
+				firstTime = false;
+			 }
+
+            private function dragIt(event:MouseEvent):void{
+            	if (draggingWhole){
+            		myGraph.x-=currentPos.x-event.stageX;
+            		myGraph.y-=currentPos.y-event.stageY;
+	            }
+	            currentPos.x = event.stageX;
+	            currentPos.y = event.stageY;
+            }
+
+            private function zoomIt(event:MouseEvent):void {
+				if (event.delta > 0) {
+					var center:Point = getViewportCenter();
+					zoom*=1.5;
+					myGraph.scaleX = zoom;
+					myGraph.scaleY = zoom;
+					moveToCenter(center.x, center.y);
+				}else if (event.delta < 0) {
+					var center:Point = getViewportCenter();
+					zoom/=1.5;
+					myGraph.scaleX = zoom;
+					myGraph.scaleY = zoom;
+					moveToCenter(center.x, center.y);
+				}
+				// myGraph.zoom(zoom);
+
+            }
+
+
+			private function hexToInt(s:String):uint{
+
+				var val:uint=0;
+
+				for(var i:int=0;i<s.length;i++){
+					var c:String = s.charAt(i);
+
+					val *= 16;
+					if (c=='0')
+						val+=0;
+					else if (c=='1')
+						val+=1;
+					else if (c=='2')
+						val+=2;
+					else if (c=='3')
+						val+=3;
+					else if (c=='4')
+						val+=4;
+					else if (c=='5')
+						val+=5;
+					else if (c=='6')
+						val+=6;
+					else if (c=='7')
+						val+=7;
+					else if (c=='8')
+						val+=8;
+					else if (c=='9')
+						val+=9;
+					else if (c=='A')
+						val+=10;
+					else if (c=='B')
+						val+=11;
+					else if (c=='C')
+						val+=12;
+					else if (c=='D')
+						val+=13;
+					else if (c=='E')
+						val+=14;
+					else if (c=='F')
+						val+=15;
+				}
+
+				return val;
+			}
+
+				private function intToHex(n:int):String{
+
+				var temp:int=n;
+				var nexttemp:int=n;
+				var remain:int=n;
+				var result:String = "";
+
+				while(temp > 0){
+					nexttemp = temp/16;
+					remain = temp - nexttemp*16;
+					var c:String;
+					if (remain == 0)
+						c="0";
+					else if (remain == 1)
+						c="1";
+					else if (remain == 2)
+						c="2";
+					else if (remain == 3)
+						c="3";
+					else if (remain == 4)
+						c="4";
+					else if (remain == 5)
+						c="5";
+					else if (remain == 6)
+						c="6";
+					else if (remain == 7)
+						c="7";
+					else if (remain == 8)
+						c="8";
+					else if (remain == 9)
+						c="9";
+					else if (remain == 10)
+						c="A";
+					else if (remain == 11)
+						c="B";
+					else if (remain == 12)
+						c="C";
+					else if (remain == 13)
+						c="D";
+					else if (remain == 14)
+						c="E";
+					else if (remain == 15)
+						c="F";
+
+					if(result == "")
+						result = c;
+					else
+						result = c + result;
+					temp = nexttemp;
+				}
+
+				while(result.length < 6) {
+					result = "0" + result;
+				}
+				result = "#" + result;
+				return result;
+			}
+
+
+			private function initConceptMenu():void {
+                //var myMenu:Menu = new Menu();
+                //myMenu.dataProvider = linkOptions;
+                //myMenu.addEventListener("itemClick", changeHandler);
+                //conceptPopUp.popUp = myMenu;
+            }
+
+             private function changeHandler(event:MenuEvent):void {
+                //var label:String = event.label;
+                //conceptPopUp.label = label;
+                //conceptPopUp.close();
+            }
+
+
+			private function retrieveCitation(event:MouseEvent):void {
+				var id:String;
+				if (event.target.parent.parent.parent.parent == nonRelevantList) {
+					id = nonRelevantList.selectedItem.data;
+					// selectedText = nonRelevantList.selectedItem.label;
+				}else {
+					id = relevantList.selectedItem.data;
+					// selectedText = relevantList.selectedItem.label;
+				}
+
+				var url:String = "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmode=xml&id="+id;
+
+				url = escape(url);
+
+//				if (relevantCitationsText && relevantCitationsText.text)
+//					relevantCitationsText.text = "";
+            	citations.addEventListener("result", citationCallback);
+            	showingRelevantCitation = true;
+
+				citations.url = "../servlet/RetrieveArticle?url=" + url;
+                currentState = 'relevantCitation';
+				citations.send();
+			}
+
+			private function retrieveRelevantCitation(event:MouseEvent):void {
+				var id:String;
+				id = relevantList.selectedItem.data;
+				// selectedText = new Array();
+				// selectedText.push(relevantList.selectedItem.label);
+
+				var url:String = "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmode=xml&id="+id;
+
+				url = escape(url);
+
+            	citations.addEventListener("result", citationCallback);
+            	showingRelevantCitation = true;
+
+				citations.url = "../servlet/RetrieveArticle?url=" + url;
+                currentState = 'relevantCitation';
+				citations.send();
+			}
+
+			private function retrieveNonrelevantCitation(event:MouseEvent):void {
+				var id:String;
+				id = nonRelevantList.selectedItem.data;
+				// selectedText = new Array();
+				// selectedText.push(nonRelevantList.selectedItem.label);
+
+				var url:String = "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmode=xml&id="+id;
+
+				url = escape(url);
+
+            	citations.addEventListener("result", citationCallback);
+            	showingRelevantCitation = true;
+
+				citations.url = "../servlet/RetrieveArticle?url=" + url;
+                currentState = 'relevantCitation';
+				citations.send();
+			}
+
+            private function retrieveCitations():void{
+            	var ids:Array = selectedCitations.split(",");
+
+            	var url:String = "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmode=xml";
+
+				var tempString:String;
+
+				if (relevantRadio){
+            		if (relevantRadio.selected) {
+						for each(var ss:String in ids)
+							for each(var cui:Object in relevantList.dataProvider) {
+								tempString = new String(cui.data);
+								if (tempString == ss){
+									url = url + "&id=" + ss;
+								}
+							}
+            		}else{
+            			for each(var ss:String in ids)
+							for each(var cui:Object in nonRelevantList.dataProvider) {
+								tempString = new String(cui.data);
+								if (tempString == ss)
+									url = url + "&id=" + ss;
+
+							}
+					}
+            	}else
+					for each(var ss:String in ids)
+						url = url + "&id=" + ss;
+
+				url = escape(url);
+
+//				if (citationsText && citationsText.text)
+//					citationsText.text = "";
+            	citations.addEventListener("result", citationCallback);
+
+
+				citations.url = "../servlet/RetrieveArticle?url=" + url;
+
+				citations.send();
+            }
+
+            private function citationCallback(event:ResultEvent) : void{
+				var xml:Object = event.result;
+
+				var textPanel:VBox;
+				if (showingRelevantCitation){
+					textPanel = relevantCitationsVbox;
+					showingRelevantCitation = false;
+				}else
+					textPanel = citationsVbox;
+
+				textPanel.removeAllChildren();
+
+				var text:String = "";
+				var totalS:String = "";
+				if (xml.PubmedArticleSet.PubmedArticle.hasOwnProperty("MedlineCitation")){
+					var pubDate:String = "<br><h2>Date of Publication: ";
+					if(xml.PubmedArticleSet.PubmedArticle.MedlineCitation.Article.Journal.JournalIssue.PubDate.hasOwnProperty("Month")) {
+						pubDate+=xml.PubmedArticleSet.PubmedArticle.MedlineCitation.Article.Journal.JournalIssue.PubDate.Month + " ";
+						// pubDate+=xml.PubmedArticleSet.PubmedArticle.MedlineCitation.Article.Journal.JournalIssue.PubDate.Day + " ";
+						pubDate+=xml.PubmedArticleSet.PubmedArticle.MedlineCitation.Article.Journal.JournalIssue.PubDate.Year + "</h2>";
+					} else if(xml.PubmedArticleSet.PubmedArticle.MedlineCitation.Article.Journal.JournalIssue.PubDate.hasOwnProperty("MedlineDate")) {
+						pubDate+=xml.PubmedArticleSet.PubmedArticle.MedlineCitation.Article.Journal.JournalIssue.PubDate.MedlineDate + "</h2>";
+					}
+					totalS= " <h1>PMID:<a target=\"_blank\" href=\"http://www.ncbi.nlm.nih.gov/sites/entrez?"+
+					"cmd=Retrieve&db=pubmed&dopt=AbstractPlus&list_uids="+xml.PubmedArticleSet.PubmedArticle.MedlineCitation.PMID+
+					"\">"+xml.PubmedArticleSet.PubmedArticle.MedlineCitation.PMID+"</a></h1>";
+					totalS+=pubDate;
+					totalS+="<br><h2>Title: "+escapeHTML(xml.PubmedArticleSet.PubmedArticle.MedlineCitation.Article.ArticleTitle,selectedText)+"</h2>";
+					totalS+="<br><h2>Abstract:</h2><p> ";
+					if (xml.PubmedArticleSet.PubmedArticle.MedlineCitation.Article.Abstract && xml.PubmedArticleSet.PubmedArticle.MedlineCitation.Article.Abstract.AbstractText)
+							totalS += escapeHTML(xml.PubmedArticleSet.PubmedArticle.MedlineCitation.Article.Abstract.AbstractText, selectedText);
+						else
+							totalS += "NO ABSTRACT FOUND.";
+					totalS+="</p>";
+					totalS += "<br>";
+					totalS = highlightSelected(totalS,selectedText);
+					//textPanel.addChild(createText(totalS));
+					createText(totalS, textPanel,xml.PubmedArticleSet.PubmedArticle.MedlineCitation.PMID);
+				}else {
+					for each (var article:Object in xml.PubmedArticleSet.PubmedArticle){
+						var pubDate:String = "<br><h2>Date of Publication: ";
+						if(article.MedlineCitation.Article.Journal.JournalIssue.PubDate.hasOwnProperty("Month")) {
+							pubDate+=article.MedlineCitation.Article.Journal.JournalIssue.PubDate.Month + " ";
+							// pubDate+=article.MedlineCitation.Article.Journal.JournalIssue.PubDate.Day + " ";
+							pubDate+=article.MedlineCitation.Article.Journal.JournalIssue.PubDate.Year + "</h2>";
+						} else if(article.MedlineCitation.Article.Journal.JournalIssue.PubDate.hasOwnProperty("MedlineDate")) {
+							pubDate+=article.MedlineCitation.Article.Journal.JournalIssue.PubDate.MedlineDate + "</h2>";
+						}
+						totalS =" <h1>PMID:<a target=\"_blank\" href=\"http://www.ncbi.nlm.nih.gov/sites/entrez?"+
+						"cmd=Retrieve&db=pubmed&dopt=AbstractPlus&list_uids="+article.MedlineCitation.PMID+
+						"\">"+article.MedlineCitation.PMID+"</a></h1>";
+						totalS+=pubDate;
+						totalS+="<br><h2>Title: "+escapeHTML(article.MedlineCitation.Article.ArticleTitle,selectedText)+"</h2>";
+						totalS += "<br><h2>Abstract:</h2><p> ";
+						if (article.MedlineCitation.Article.Abstract && article.MedlineCitation.Article.Abstract.AbstractText)
+							totalS += escapeHTML(article.MedlineCitation.Article.Abstract.AbstractText, selectedText);
+						else
+							totalS += "NO ABSTRACT FOUND.";
+						totalS+="</p>";
+						totalS += "<br><br>";
+						totalS = highlightSelected(totalS, selectedText);
+						createText(totalS, textPanel,article.MedlineCitation.PMID);
+						totalS = "";
+					}
+
+
+					//textPanel.addChild(createText(totalS));
+				}
+
+
+            }
+
+			public function createText(s:String,ui:UIComponent,pmid:Object):TextArea {
+				var t:TextArea = new TextArea();
+				var c:CheckBox = new CheckBox();
+				// SemMedNHLBI version for check box
+				c.label = "Select "+pmid;
+				c.selected = true;
+				c.data = pmid;
+				ui.addChild(c);
+				// End of SemMedNHLBI version for check box
+				ui.addChild(t);
+				// t.addChild(c);
+				//c.x = 150;
+				//c.y = 10;
+				t.percentWidth = 100;
+				t.height = 400;
+				t.htmlText = s;
+				// t.html = true;
+				// t.text = s;
+
+
+				var ss:StyleSheet = new StyleSheet();
+				var h1:Object = new Object();
+		        h1.fontFamily = "Verdana, Arial, Geneva, sans";
+		        h1.fontWeight = "bold";
+		        h1.color = "#6600CC";
+		        h1.fontSize = 16;
+		        h1.leading = 10;
+
+		        var h2:Object = new Object();
+		        h2.fontFamily = "Verdana, Arial, Geneva, sans";
+		        h2.fontWeight = "bold";
+		        h2.color = "#666666";
+		        h2.fontSize = 16;
+		        h2.leading = 4;
+
+		        var para:Object = new Object();
+		        para.fontFamily = "Georgia, Times New Roman, serif";
+		        para.fontStyle = "normal";
+		        para.leading = 4;
+		        para.fontSize = 12;
+		        para.display = "block";
+		        para.color = "#000000";
+		        para.fontWeight="normal";
+
+		        var a:Object = new Object();
+		        a.fontStyle = "normal";
+		        a.leading = 4;
+		        a.fontSize = 12;
+		        //a.fontSize = 16;
+		        a.color = "#0066FF";
+		        //a.color= "#00FF00";
+		        a.textDecoration = "underline";
+
+		        var h3:Object = new Object();
+		        // h3.color = "#FF0000";
+		        h3.color = "#FF5500";
+		        h3.backgroundColor = "#FFFF00";
+				h3.fontWeight = "bold";
+				// h3.fontStyle = "italic";
+
+		        ss.setStyle("h1", h1);
+		        ss.setStyle("h2", h2);
+		        ss.setStyle("p", para);
+		        ss.setStyle("a", a);
+		        ss.setStyle("h3", h3);
+				t.styleSheet = ss;
+
+				c.addEventListener(MouseEvent.CLICK, function(event:MouseEvent):void {
+						var d:Object = event.target.data;
+
+						if (c.selected){
+							select(c.data);
+							moveItem(c.data);
+						}else{
+							deselect(c.data);
+							moveItem(c.data);
+						}
+				});
+
+				return t;
+			}
+
+
+			public function moveItem(item:Object):void {
+				var source:List = null;
+				var destination:List = null;
+				var selectedItem:Object;
+				var index:Number=0;
+
+				for each(var element:Object in relevantList.dataProvider) {
+					if (element.data == item) {
+						source = relevantList;
+						destination = nonRelevantList;
+						selectedItem = element;
+						trace("Found it in relevants");
+						break;
+
+					}
+					index++;
+				}
+
+				if (!source) {
+					index = 0;
+					for each(var element:Object in nonRelevantList.dataProvider) {
+						if (element.data == item) {
+							source = nonRelevantList;
+							destination = relevantList;
+							selectedItem = element;
+							trace("found it in non-releavants");
+							break;
+						}
+						index++;
+					}
+				}
+				trace("it's item " + index);
+				destination.dataProvider.addItem(selectedItem);
+				source.dataProvider.removeItemAt(index);
+				//source.selectedItems.push(selectedItem);
+
+				var selectedItems:Array = new Array();
+				for each(element in source.selectedItems)
+					selectedItems.push(element);
+				selectedItems.push(selectedItem);
+				source.selectedItems = selectedItems;
+			}
+
+			public function select(s:Object) {
+
+				if (!relevantList || !nonRelevantList)
+					return;
+
+				var ss:String = new String(s);
+				var p:Array;
+
+
+				if (relevantRadio.selected) {
+					p= new Array();
+					for each(var item:Object in relevantList.selectedItems)
+						p.push(item);
+					for each (item in relevantList.dataProvider) {
+						var ss2:String = new String(item.data);
+						if (ss == ss2)
+							p.push(item);
+					}
+					relevantList.selectedItems = p;
+				}
+
+
+				if (nonRelevantRadio.selected) {
+					p= new Array();
+					for each(var item:Object in nonRelevantList.selectedItems)
+						p.push(item);
+					for each (item in nonRelevantList.dataProvider) {
+						var ss2:String = new String(item.data);
+						if (ss == ss2)
+							p.push(item);
+					}
+					nonRelevantList.selectedItems = p;
+				}
+			}
+
+			public function deselect(s:Object) {
+
+				if (!relevantList || !nonRelevantList)
+					return;
+
+				var ss:String = new String(s);
+				var p:Array;
+
+				if (relevantRadio.selected){
+					p = new Array();
+					for each (var item:Object in relevantList.selectedItems) {
+						var ss2:String = new String(item.data);
+						if (ss != ss2)
+							p.push(item);
+					}
+					relevantList.selectedItems = p;
+				}
+
+				if (nonRelevantRadio.selected){
+					p = new Array();
+					for each (item in nonRelevantList.selectedItems) {
+						var ss2:String = new String(item.data);
+						if (ss != ss2)
+							p.push(item);
+					}
+					nonRelevantList.selectedItems = p;
+				}
+			}
+
+            public function escapeHTML(s:String,a:Array):String{
+
+				s = s.replace( />/g, "&lt;");
+				s = s.replace( /</g, "&gt;");
+				s = s.replace( /\"/g, "&quot;");
+				s = s.replace( /&/g, "&amp;");
+				//var s2:String;
+           		//while ((s2=s.replace("<","&lt;"))!=s)
+           		//	s = s2;
+	        	//while ((s2=s.replace(">","&gt;"))!=s)
+           		//	s = s2;
+
+           		//s=s2;
+            	//var pattern:RegExp;
+				//for each (var e:String in a) {
+				//	pattern = new RegExp(e, "ig");
+            	//	s = s.replace(pattern, "<b>" + e + "</b>");
+				//}
+
+            	return s;
+            }
+
+			public function unRegexp(s:String):String {
+				s = s.replace( /\(/g, "\\(");
+				s = s.replace( /\)/g, "\\)");
+				s = s.replace( /\[/g, "\\[");
+				s = s.replace( /\]/g, "\\]");
+				s = s.replace( /\-/g, "\\-");
+				s = s.replace( /\./g, "\\.");
+				s = s.replace( /\*/g, "\\*");
+				return s;
+			}
+
+			public function regexp(s:String):String {
+				s = s.replace( /\\\(/g, "(");
+				s = s.replace( /\\\)/g, ")");
+				s = s.replace( /\\\[/g, "[");
+				s = s.replace( /\\\]/g, "]");
+				s = s.replace( /\\\-/g, "-");
+				s = s.replace( /\\\./g, ".");
+				s = s.replace( /\\\*/g, "*");
+				return s;
+			}
+
+			public function highlightSelected(s:String, a:Array):String {
+				var pattern:RegExp;
+				s = s.replace( /\.\,/g, ". ");
+				for each (var e:String in a) {
+					e = e.replace(/^AIM\:/, "");
+					e = e.replace(/^AIMS\:/, "");
+					e = e.replace(/^OBJECTIVE\:/, "");
+					e = e.replace(/^OBJECTIVES\:/, "");
+					e = e.replace(/^CONTEXT AND OBJECTIVE:\:/, "");
+					e = e.replace(/^DESIGN\:/, "");
+					e = e.replace(/^DESIGNS\:/, "");
+					e = e.replace(/^DESIGN AND PARTICIPANTS\:/, "");
+					e = e.replace(/^SETTING\:/, "");
+					e = e.replace(/^SETTINGS\:/, "");
+					e = e.replace(/^METHOD\:/, "");
+					e = e.replace(/^METHODS\:/, "");
+					e = e.replace(/^OUTCOME MEASURES\:/, "");
+					e = e.replace(/^RESULT\:/, "");
+					e = e.replace(/^RESULTS\:/, "");
+					e = e.replace(/^CONCLUSION:/, "");
+					e = e.replace(/^CONCLUSIONS:/, "");
+					pattern = new RegExp(e, "i");
+            		s = s.replace(pattern, "<h3>$&</h3>");
+				}
+				return s;
+			}
+
+            public function loadNode(node:Object,semTypes:Array, clNodeNum:Number):void{
+            	var clNodeStr:String = String(clNodeNum);
+            	// Alert.show('Begin loadNode()', 'Alert Box', mx.controls.Alert.OK);
+            	var nodeSprite:NodeSprite = myGraph.dataF.addUniqueNode(clNodeStr, {CUI:node.id,name:node.name,semtype:node.semtype,cluster:clNodeStr, connectivity:null, umlks:null,extra:null});
+            	// var nodeSprite:NodeSprite = myGraph.dataF.addNode({CUI:node.id,name:node.name,semtype:node.semtype,cluster:clNodeNum, umlks:null,extra:null});
+				// var nodeSprite:TextSprite = myGraph.dataF.addNode({CUI:node.id,name:node.name,semtype:node.semtype,umlks:null,extra:null});
+				if(nodeSprite == null) {
+					// Alert.show('duplicate nodeSprint is null!', 'Alert Box', mx.controls.Alert.OK);
+					return;
+				}
+				nodeNum++;
+				// Alert.show('node is added in loadNode()', 'Alert Box', mx.controls.Alert.OK);
+
+            	// if (node.name == seed.name)
+            	//	seed.node = nodeSprite;
+
+            	if (node.hasOwnProperty('connectivity'))
+            		nodeSprite.data.connectivity = node.connectivity;
+            	if (node.hasOwnProperty('umlsks_url'))
+            		nodeSprite.data.umlks = node.umlsks_url;
+            	if (node.hasOwnProperty('ghr_url'))
+            		nodeSprite.data.ghr = node.ghr_url;
+				if (node.hasOwnProperty('omim_url'))
+					nodeSprite.data.omim = node.omim_url;
+				if (node.hasOwnProperty('entrezgene_url'))
+					nodeSprite.data.entrez = node.entrezgene_url;
+
+                // Alert.show('loadNode step 1', 'Alert Box', mx.controls.Alert.OK);
+           		var text:TextField = new TextField();
+           		// var text:TextSprite = new TextSprite();
+           		text.x=0;
+           		text.y=0;
+
+				text.text = node.name;
+				// text.size = 11;
+				text.autoSize = TextFieldAutoSize.LEFT;
+				// text.autoSize = TextFieldAutoSize.NONE;
+				// text.selectable = false;
+				var tf:TextFormat = new TextFormat();
+				// if (node.name == seed.name) {
+				//	tf.size = 12;
+				//	tf.bold = true;
+				// } else {
+					tf.size=10;
+				// }
+				text.setTextFormat(tf);
+				text.x = -text.width/2;
+				// Alert.show('loadNode step 2', 'Alert Box', mx.controls.Alert.OK);
+				// nodeSprite.renderer = ShapeRenderer.instance;
+				var nrenderer = null;
+				// if (node.name == seed.name) {
+					// nodeSprite.shape = 2;
+				//	nrenderer = new SeedNodeRenderer();
+				// } else
+					nrenderer = new NodeRenderer();
+				nrenderer.setZoom(1);
+				nodeSprite.renderer = nrenderer;
+				// Alert.show('loadNode step 3', 'Alert Box', mx.controls.Alert.OK);
+				nodeSprite.addChild(text);
+				// nodeSprite.trueFillAlpha = 0.7;
+				if (node.hasOwnProperty('color')) {
+					// if(node.color.charAt(0) == '#')
+					nodeSprite.trueFillColor = hexToInt(node.color.substring(1));
+					// else
+					//	nodeSprite.trueFillColor = node.color;
+				}
+				nodeSprite.trueLineAlpha = 0.1;
+				nodeSprite.trueLineColor = 0x000000;
+				if(node.hasOwnProperty('x'))
+					nodeSprite.x = node.x;
+				if(node.hasOwnProperty('y'))
+					nodeSprite.y = node.y;
+				if(node.hasOwnProperty('visible'))
+					nodeSprite.visible = node.visible;
+				// Alert.show('loadNode step 4', 'Alert Box', mx.controls.Alert.OK);
+
+				nodeSprite.addEventListener(MouseEvent.MOUSE_DOWN,function(event:MouseEvent):void{
+					draggingLittle = true;
+					nodeSprite.startDrag();
+				});
+
+				nodeSprite.addEventListener(MouseEvent.MOUSE_UP,function(event:MouseEvent):void{
+					draggingLittle = false;
+					nodeSprite.stopDrag();
+					myGraph.redraw();
+				});
+				// Alert.show('loadNode step 5', 'Alert Box', mx.controls.Alert.OK);
+
+				nodeSprite.addEventListener(MouseEvent.CLICK,function (event:MouseEvent):void{
+					if (event.target.hasOwnProperty("data") && event.target.data.hasOwnProperty("CUI")){
+						conceptLabel.text = event.target.data.name;
+						cuiLabel.text = event.target.data.CUI;
+						semtypeLabel.text = event.target.data.semtype;
+						showConcept();
+						myGraph.unglow();
+						if (event.target.data.nPredications)
+							nodePredicationLabel.text = event.target.data.nPredications;
+						else
+							nodePredicationLabel.text = "0";
+						if (event.target.data.umlks!=null){
+							umlsLink.text = event.target.data.umlks;
+							umlsButton.enabled = true;
+						}else
+							umlsButton.enabled = false;
+						if (event.target.data.ghr!=null){
+							ghrLink.text = event.target.data.ghr;
+							ghrButton.enabled = true;
+						}else
+							ghrButton.enabled = false;
+
+						if (event.target.data.omim!=null){
+							omimLink.text = event.target.data.omim;
+							omimButton.enabled = true;
+						}else
+							omimButton.enabled = false;
+
+						if (event.target.data.entrez!=null){
+							entrezLink.text = event.target.data.entrez;
+							entrezButton.enabled = true;
+						}else
+							entrezButton.enabled = false;
+						accordion1.selectedIndex = 0;
+					}
+				});
+				 // Alert.show('loadNode step 6', 'Alert Box', mx.controls.Alert.OK);
+
+				myGraph.allNodes.push(nodeSprite);
+				// Alert.show('loadNode step 7', 'Alert Box', mx.controls.Alert.OK);
+
+				var alreadyAdded:Boolean = false;
+
+				for each(var o:Object in semTypes)
+					if (o.semtype == node.semtype){
+						alreadyAdded = true;
+						break;
+					}
+				if (!alreadyAdded)
+					semTypes.push({semtype:node.semtype,color:node.color});
+            }
+
+            public function loadEdge(edge:Object,predicates:Array, visibility:String, cl:Number):void{
+            	var s:String;
+            	var t:String;
+            	var l:String;
+            	var color:String;
+
+           		s = edge.source;
+           		t = edge.target;
+           		l = edge.label;
+           		color = edge.color;
+           		var clNodeStr = String(cl);
+
+
+				if (s == 'C0683474' && t == 'C0028754')
+					trace("this is the one");
+
+            	var source:NodeSprite = null;
+            	var msg:String = "edge cluster = " + cl;
+            	// Alert.show(msg);
+            	// Alert.show('In loadEdge step 1', 'Alert Box', mx.controls.Alert.OK);
+            	for(var i:int = 0;i<myGraph.dataF.nodes.size;i++){
+            		if (myGraph.dataF.nodes[i].data.CUI == s){
+            			source = myGraph.dataF.nodes[i];
+            			break;
+            		}
+            	}
+            	// Alert.show('In loadEdge step 1', 'Alert Box', mx.controls.Alert.OK);
+
+            	var target:NodeSprite = null;
+            	for(var j:int = 0;j<myGraph.dataF.nodes.size;j++){
+            		if (myGraph.dataF.nodes[j].data.CUI == t){
+            			target = myGraph.dataF.nodes[j];
+            			break;
+            		}
+            	}
+            	// Alert.show('In loadEdge step 2', 'Alert Box', mx.controls.Alert.OK);
+
+				if (source.data.nPredications)
+					source.data.nPredications++;
+				else
+					source.data.nPredications = 1;
+
+				if (target.data.nPredications)
+					target.data.nPredications++;
+				else
+					target.data.nPredications = 1;
+
+				var realColor:String = color.substring(1);
+				var msg2:String = "target node = " + target.data.name;
+				// Alert.show(msg1, 'Alert Box', mx.controls.Alert.OK);
+				// Alert.show(msg2, 'Alert Box', mx.controls.Alert.OK);
+            	// var e:EdgeSprite = myGraph.dataF.addEdgeFor(source,target,true,{predicate:l,citation:"",subject:source.data.name,target:target.data.name});
+				// var e:EdgeSprite = myGraph.dataF.addEdgeFor(source,target,true,{predicate:l,citation:"",subject:source.data.name,target:target.data.name,subjectCUI:source.data.CUI,targetCUI:target.data.CUI});
+				// var nodeSprite:NodeSprite = myGraph.dataF.addUniqueNode(clNodeStr, {CUI:node.id,name:node.name,semtype:node.semtype,cluster:clNodeStr, umlks:null,extra:null});
+				var e:EdgeSprite = myGraph.dataF.addUniqueEdgeFor(clNodeStr, source,target,true,{predicate:l,cluster:clNodeStr,orgColor:realColor,citation:"",subject:source.data.name,target:target.data.name,subjectCUI:source.data.CUI,targetCUI:target.data.CUI});
+                // if(e== null) {
+                //	Alert.show('edge is null!', 'Alert Box', mx.controls.Alert.OK);
+                // } else {
+                // 	Alert.show('edge is not null!', 'Alert Box', mx.controls.Alert.OK);
+                // }
+				if(e == null) {
+					return;
+				}
+				if(visibility == "invisible") {
+					myGraph.dataF.removeEdge(e);
+				}
+
+            	myGraph.allEdges.push(e);
+            	// Alert.show('In loadEdge step 4', 'Alert Box', mx.controls.Alert.OK);
+            		e.renderer = semmed.EdgeRenderer.instance;
+            	// Alert.show(String(cl));
+            		// if(color.charAt(0) == '#') // hexadecimal
+            		// e.fillColor = hexToInt(color.substring(1));
+            		// Alert.show(String(clusterColor[cl]));
+            		e.fillColor = hexToInt(clusterColor[cl]);
+            		// else	// already decimal
+            		//	e.fillColor = color;
+            		e.alpha = 1;
+            		e.lineAlpha = 1;
+            		e.lineWidth = 2;
+            		e.buttonMode = true;
+            	var contained:Boolean = false;
+            	for(i = 0; i<predicates.length;i++) {
+            		if (predicates[i].label==l){
+						contained = true;
+						break;
+            		}
+            	}
+            	// Alert.show('In loadEdge step 5', 'Alert Box', mx.controls.Alert.OK);
+
+				var sentences:Array = new Array();
+
+				if (!contained)
+				// Dongwook Shin, 09/18/2008
+				// It was changed after graph save feature, since the saved graph has all the edges and some edges invisible has to be filtered out
+            	// if (!contained && !source.visible == false && !target.visible == false)
+            	// Need to use the original color instead of cluster color
+            	//	predicates.push({label:l,color:e.fillColor});
+            		predicates.push({label:l,color:hexToInt(e.data.orgColor)});
+
+				var uniqueCitations:Number = 1;
+            	var pmid:String;
+            	if (edge.sentence.hasOwnProperty("id")){
+            		pmid  = edge.sentence.id;
+            		pmid = pmid.substr(0, pmid.indexOf("."));
+            		// FIX: If there is space at the end of the PMID, NHLBI doesn't draw the relevant/non/relevant graph correctly
+            		if(pmid.charAt(pmid.length -1) == " ")
+	            			pmid = pmid.substr(0, pmid.length-1);
+            		e.data.citation+=pmid+",";
+            		sentences.push(unRegexp(escapeHTML(edge.sentence.text,new Array())));
+            	}else{
+	            	for each(var n:Object in edge.sentence){
+	            		pmid = n.id;
+	            		pmid = pmid.substr(0, pmid.indexOf("."));
+	            		// FIX: If there is space at the end of the PMID, NHLBI doesn't draw the relevant/non/relevant graph correctly
+	            		if(pmid.charAt(pmid.length -1) == " ")
+	            			pmid = pmid.substr(0, pmid.length-1);
+						//if (e.data.citation && (e.data.citation as String).indexOf(pmid) == -1)
+						//	uniqueCitations++;
+	            		e.data.citation+=pmid+",";
+	            		sentences.push(unRegexp(escapeHTML(n.text,new Array())));
+	            	}
+	            }
+                // Alert.show('In loadEdge step 6', 'Alert Box', mx.controls.Alert.OK);
+            	e.data.sentences = sentences;
+            	e.data.predications = sentences.length;
+				e.data.citationNumber = uniqueCitations;
+				// Alert.show('In loadEdge step 7', 'Alert Box', mx.controls.Alert.OK);
+
+            	/* e.addEventListener(MouseEvent.CLICK,function (event:MouseEvent):void{
+					if (event.target.hasOwnProperty("data") && event.target.data.hasOwnProperty("predicate")){
+						showEdge();
+						predicateLabel.text = event.target.data.predicate;
+						targetLabel.text = event.target.data.target;
+						sourceLabel.text = event.target.data.subject;
+						predicationNumberLabel.text = event.target.data.predications;
+
+
+						selectedCitations = event.target.data.citation;
+
+						var numberPredications:Number = 0;
+						var numberCitations:Number = 0;
+						var ids:Array = selectedCitations.split(",");
+
+						ids.pop();
+
+
+
+						var tempString:String;
+						var unique:Array = uniqueIDS(ids);
+
+						if (relevantRadio && relevantRadio.selected) {
+							for each(var ss:String in ids)
+								for each(var cui:Object in relevantList.dataProvider) {
+									tempString = new String(cui.data);
+									if (tempString == ss)
+										numberPredications++;
+								}
+							for each(ss in unique)
+								for each(var cui:Object in relevantList.dataProvider) {
+									tempString = new String(cui.data);
+									if (tempString == ss)
+										numberCitations++;
+								}
+						}else if	(relevantRadio && nonRelevantRadio.selected){
+							for each(var ss:String in ids)
+								for each(var cui:Object in nonRelevantList.dataProvider) {
+									tempString = new String(cui.data);
+									if (tempString == ss)
+										numberPredications++;
+								}
+							for each(ss in unique)
+								for each(cui in nonRelevantList.dataProvider) {
+									tempString = new String(cui.data);
+									if (tempString == ss)
+										numberCitations++;
+								}
+						}else{
+							numberPredications = ids.length;
+							numberCitations = unique.length;
+						}
+
+						predicationNumberLabel.text = new String(numberPredications);
+						citationNumberLabel.text = new String(numberCitations);
+						selectedText = event.target.data.sentences;
+						accordion1.selectedIndex = 0;
+
+						if ((relevants && relevants.citation) ||
+						     (nonRelevants && nonRelevants.citation)) {
+							highlightTitles(event.target as EdgeSprite);
+						}
+					}
+				}); */
+
+				e.addEventListener(MouseEvent.CLICK,function (event:MouseEvent):void{
+					if (event.target.hasOwnProperty("data") && event.target.data.hasOwnProperty("predicate")){
+						showEdge();
+						cNum = 0;
+						edgeInformation.removeAllChildren();
+						// myGraph.unglow();
+						// predicateLabel.text = event.target.data.predicate;
+						// targetLabel.text = event.target.data.target;
+						// sourceLabel.text = event.target.data.subject;
+						// predicationNumberLabel.text = event.target.data.predications;
+						var scLabel:Label = new Label;
+						scLabel.text = "Subject:";
+						scLabel.x = 0;
+						scLabel.y = 0;
+						edgeInformation.addChild(scLabel);
+						var sLabel:Label = new Label;
+						sLabel.text = event.target.data.subject;
+						sLabel.x = 50;
+						sLabel.y = 0;
+						edgeInformation.addChild(sLabel);
+						var tcLabel:Label = new Label;
+						tcLabel.text = "Object:";
+						tcLabel.x = 0;
+						tcLabel.y = 20;
+						edgeInformation.addChild(tcLabel);
+						var tLabel:Label = new Label;
+						tLabel.text = event.target.data.target;
+						tLabel.x = 50;
+						tLabel.y = 20;
+						edgeInformation.addChild(tLabel);
+						var rcLabel:Label = new Label;
+						rcLabel.text = "Relation:";
+						rcLabel.x = 0;
+						rcLabel.y = 40;
+						edgeInformation.addChild(rcLabel);
+						accordion1.selectedIndex = 0;
+						// var i:Number = 0;
+						edgeFilters = new Array();
+						for each (var e:EdgeSprite in myGraph.allEdges){
+							if(e.source.data.name == event.target.data.subject && e.target.data.name == event.target.data.target) {
+								var rb:RadioButton = new RadioButton();
+	            				rb.label = e.data.predicate;
+	            				rb.value = "s|" + event.target.data.subject + "|" + event.target.data.target;
+	            				edgeFilters.push(rb);
+	            				for(var k:int=0;k<predicates.length;k++){
+	            					if(e.data.predicate == predicates[k].label) {
+	            					    rb.setStyle("color", predicates[k].color);
+										rb.setStyle("fillColors", [predicates[k].color, 0xAAAAAA]);
+										rb.setStyle("fillAlphas", [1, 1]);
+									}
+	            				}
+
+								rb.x = 50;
+								rb.y = 60 + cNum*20;
+								rb.addEventListener(MouseEvent.CLICK, radioButtonHandler);
+	            				edgeInformation.addChild(rb);
+								cNum = cNum+1;
+							} else if(e.target.data.name == event.target.data.subject && e.source.data.name == event.target.data.target) {
+								var rb:RadioButton = new RadioButton();
+	            				rb.label = e.data.predicate;
+	            				rb.value = "o|" + event.target.data.subject + "|" + event.target.data.target;
+	            				edgeFilters.push(rb);
+	            				for(var k:int=0;k<predicates.length;k++){
+	            					if(e.data.predicate == predicates[k].label) {
+	            					    rb.setStyle("color", predicates[k].color);
+										rb.setStyle("fillColors", [predicates[k].color, 0xAAAAAA]);
+										rb.setStyle("fillAlphas", [1, 1]);
+									}
+	            				}
+
+								rb.x = 50;
+								rb.y = 60 + cNum*20;
+								rb.addEventListener(MouseEvent.CLICK, radioButtonHandler);
+	            				edgeInformation.addChild(rb);
+								cNum = cNum+1;
+							}
+						}
+					}
+				});
+            }
+
+		function radioButtonHandler(event:MouseEvent):void {
+			// Alert.show("In radioButtonHandler()");
+			filterEdge();
+		}
+
+		/* function radioButtonReverseHandler(event:MouseEvent):void {
+			// Alert.show("In radioButtonHandler()");
+			filterReverseEdge();
+		} */
+
+		function buttonHandler(event:MouseEvent):void {
+   			 currentState='citation';
+   			 retrieveCitations();
+		}
+
+
+		function sliderHandler(event:SliderEvent):void {
+               // Alert.show("In SliderHandler()");
+                var currentSlider:Slider=Slider(event.currentTarget);
+                var maxNodeNum:Number = Number(currentSlider.value);
+                var count:Number = 0;
+
+                if(maxNodeNum == highConnectivityCount)
+                	return;
+                allNodesUsed = false;
+                highConnectivityNodes = new Array();
+                for each (var v:NodeSprite in myGraph.allNodes)
+	        		v.visible = false;
+        		for each (var e:EdgeSprite in myGraph.allEdges) {
+        			myGraph.dataF.removeEdge(e);
+        		}
+        		// Alert.show("Step 2");
+                for each(var nodeInfo:Object in nodeConnectList) {
+                	// Alert.show(nodeInfo.name);
+                	if(count >= maxNodeNum)
+                		break;
+                	else {
+                		for each(var n:NodeSprite in myGraph.allNodes) {
+                			if(nodeInfo.name == n.data.name && nodeInfo.type == n.data.semtype) {
+                				// Alert.show(n.data.name);
+                				n.visible = true;
+                				highConnectivityNodes.push(n);
+                				count++;
+                				break;
+                			}
+                		}
+                	}
+                	highConnectivityCount = count;
+                	// Alert.show(String(count));
+                }
+
+               for each (var e:EdgeSprite in myGraph.allEdges)
+				if(e.source.visible == true && e.target.visible == true)
+	    	    		myGraph.dataF.addEdge(e);
+
+			myGraph.vis.update();
+        }
+
+
+			public function deselectAll():void {
+				if (relevantList)
+					relevantList.selectedIndex = -1;
+				if (nonRelevantList)
+					nonRelevantList.selectedIndex = -1;
+				myGraph.unglow();
+			}
+
+			public function highlightTitles(edge:EdgeSprite) {
+				if (!relevantList)
+					return;
+				var s:Array = uniqueIDS((edge.data.citation as String).split(","));
+				relevantList.selectedIndex = -1;
+				nonRelevantList.selectedIndex = -1;
+				var r:Array = new Array();
+				var n:Array = new Array();
+
+
+				for each (var c:String in s) {
+					if (relevantRadio.selected)
+						for (var i:Number = 0; i < relevantList.dataProvider.length;i++ ) {
+							var tempString:String = new String(relevantList.dataProvider[i].data);
+							if (tempString == c)
+								r.push(i);
+						}
+					if (nonRelevantRadio.selected)
+						for (i = 0; i < nonRelevantList.dataProvider.length;i++ ) {
+							var tempString:String = new String(nonRelevantList.dataProvider[i].data);
+							if (tempString == c)
+								n.push(i);
+						}
+				}
+				relevantList.selectedIndices = r;
+				nonRelevantList.selectedIndices = n;
+				relevantList.dispatchEvent(new ListEvent(ListEvent.ITEM_CLICK));
+				myGraph.glowEdge(edge);
+			}
+
+			public function uniqueIDS(idsAll:Array):Array {
+				var idsU:Array = new Array();
+				for each(var a:String in idsAll) {
+					var found:Boolean = false;
+					for each (var i:String in idsU)
+						if (i == a)
+							found = true;
+					if (!found)
+					idsU.push(a);
+				}
+				return idsU;
+			}
+
+            public function addListener():void{
+            	relevantList.addEventListener(MouseEvent. CLICK,function():void{
+            		if (relevantRadio.selected)
+	            		myGraph.glow(relevantList.selectedItems);
+            	});
+				relevantList.addEventListener(MouseEvent.DOUBLE_CLICK, retrieveRelevantCitation);
+            	nonRelevantList.addEventListener(MouseEvent.CLICK,function():void{
+            		if (nonRelevantRadio.selected)
+	            		myGraph.glow(nonRelevantList.selectedItems);
+            	});
+				nonRelevantList.addEventListener(MouseEvent.DOUBLE_CLICK, retrieveNonrelevantCitation);
+            }
+
+            public function dragWhole():void{
+            	if (!draggingLittle)
+	            	draggingWhole = true;
+            }
+
+            public function stopDragWhole():void{
+            	draggingWhole = false;
+            }
+
+			public function getViewportCenter():Point {
+				var x:Number = -myGraph.x/zoom+(vbox1.width/2)/zoom;
+				var y:Number = -myGraph.y/zoom + (vbox1.height / 2) / zoom;
+				return new Point(x,y);
+			}
+
+			public function getWorldPosition(xS:Number, yS:Number):Point {
+				var x:Number = -myGraph.x/zoom+(xS)/zoom;
+				var y:Number = -myGraph.y/zoom + (yS) / zoom;
+				return new Point(x,y);
+			}
+
+			public function moveToCenter(x:Number, y:Number, effect:Boolean = false):void {
+				if (effect) {
+					moveEffect.xFrom = myGraph.x;
+					moveEffect.yFrom = myGraph.y;
+					moveEffect.xTo = vbox1.width / 2 - x * zoom;
+					moveEffect.yTo = vbox1.height / 2 - y * zoom;
+					moveEffect.play();
+				}else{
+					myGraph.x = vbox1.width / 2 - x * zoom;
+					myGraph.y = vbox1.height / 2 - y * zoom;
+				}
+			}
+
+			public function noResults():void {
+				currentState = 'no_results';
+			}
+
+			public function filter(t:Boolean=true):void {
+				var p:Array = new Array();
+	            for each (var c:CheckBox in predicateFilters)
+	            	if (c.selected)
+	            		p.push(c.label);
+				var s:Array = new Array();
+	            // for each (c in semtypeFilters)
+	            //	if (c.selected)
+	            //		s.push(c.label);
+
+				if (relevantRadio){
+            		if (relevantRadio.selected)
+            			myGraph.filterCitations(relevantList.dataProvider,p,s);
+            		else
+            			myGraph.filterCitations(nonRelevantList.dataProvider,p,s);
+            	}else
+            		myGraph.filter(p,s, highConnectivityNodes);
+				// myGraph.changeLayout(layoutChoose.selectedItem.data, t);
+			}
+
+			public function filterCluster(t:Boolean=true):void {
+				var p:Array = new Array();
+	            for each (var c:CheckBox in clusterFilters)
+	            	if (c.selected) {
+	            		var i:int = c.label.indexOf(" ", 0);
+	            		var cIndex:String = c.label.substring(0,i);
+	            		p.push(cIndex);
+						// Alert.show(c.label, 'Alert Box', mx.controls.Alert.OK);
+					}
+				var s:Array = new Array();
+
+            		myGraph.filterCluster(p, highConnectivityNodes);
+				// myGraph.changeLayout(layoutChoose.selectedItem.data, t);
+			}
+
+			public function filterEdge():void {
+				var p:Array = new Array();
+				var cNumLocal:Number = cNum;
+				if(edgeInformation.contains(directionLabel))
+					edgeInformation.removeChild(directionLabel);
+				if(edgeInformation.contains(noCiteLabel))
+				if(edgeInformation.contains(cnoPredLabel))
+					edgeInformation.removeChild(cnoPredLabel);
+				// Alert.show("In filterEdge(), step 1");
+				if(edgeInformation.contains(noPredLabel))
+					edgeInformation.removeChild(noPredLabel);
+				// Alert.show("In filterEdge(), step 2");
+				if(edgeInformation.contains(cnoCiteLabel))
+					edgeInformation.removeChild(cnoCiteLabel);
+				if(edgeInformation.contains(noCiteLabel))
+					edgeInformation.removeChild(noCiteLabel);
+				if(edgeInformation.contains(citeBtn))
+					edgeInformation.removeChild(citeBtn);
+
+				var predicate:String;
+	            for each (var r:RadioButton in edgeFilters) {
+	            	var pair:String = String(r.value);
+	            	if (r.selected) {
+	            		predicate = r.label;
+	            		var cArray:Array;
+	            		cArray = pair.split("|");
+	            		break;
+	            	}
+	            }
+	            var chosenEdge:EdgeSprite;
+	            var direction:String ;
+	            for each (var e:EdgeSprite in myGraph.allEdges) {
+	            	// Edge is in the same order as source -> target
+	            	if (cArray[0] == "s" && e.data.predicate == predicate && e.source.data.name == cArray[1] && e.target.data.name == cArray[2] ) {
+	            		chosenEdge = e;
+	            		selectedText = e.data.sentences;
+						selectedCitations = e.data.citation;
+						// Alert.show("button for Straight line is selected");
+						direction = "s";
+	            		break;
+	            	} else if (cArray[0] == "o" && e.data.predicate == predicate && e.source.data.name == cArray[2] && e.target.data.name == cArray[1] ) {
+	            		chosenEdge = e;
+	            		selectedText = e.data.sentences;
+						selectedCitations = e.data.citation;
+						// Alert.show("button for opposite line is selected");
+						direction = "o";
+	            		break;
+	            	}
+	            }
+
+	            var numberPredications:Number = 0;
+				var numberCitations:Number = 0;
+				selectedCitations = chosenEdge.data.citation;
+				var ids:Array = selectedCitations.split(",");
+				ids.pop();
+				var tempString:String;
+				var unique:Array = uniqueIDS(ids);
+
+				numberPredications = ids.length;
+				numberCitations = unique.length;
+				var ids:Array = selectedCitations.split(",");
+				ids.pop();
+				var tempString:String;
+				var unique:Array = uniqueIDS(ids);
+				numberPredications = ids.length;
+				numberCitations = unique.length;
+
+						// predicationNumberLabel.text = new String(numberPredications);
+				directionLabel = new Label;
+				if(direction == "s") {
+					// Alert.show("Edge direction is the same as above mentioned.");
+					directionLabel.text = "Subject and object are the same."
+				} else {
+					// Alert.show("Edge direction is the opposite from above.");
+					directionLabel.text = "Subject and object are the opposite."
+				}
+				directionLabel.setStyle("color", hexToInt("#0000FF"));
+				directionLabel.x = 0;
+				directionLabel.y = 60 + cNumLocal*20;
+				cNumLocal = cNumLocal+1;
+				edgeInformation.addChild(directionLabel);
+
+						cnoPredLabel = new Label;
+						cnoPredLabel.text = "No. Predications:";
+						cnoPredLabel.x =  0 ;
+						cnoPredLabel.y =  60 + cNumLocal*20;
+
+						edgeInformation.addChild(cnoPredLabel);
+						noPredLabel = new Label;
+						noPredLabel.text = new String(numberPredications);
+						noPredLabel.x =  100 ;
+						noPredLabel.y =  60 + cNumLocal*20;
+
+						edgeInformation.addChild(noPredLabel);
+						cNumLocal = cNumLocal+1;
+						cnoCiteLabel = new Label;
+						cnoCiteLabel.text = "No. Citations:";
+						cnoCiteLabel.x =  0 ;
+						cnoCiteLabel.y =  60 + cNumLocal*20;
+						edgeInformation.addChild(cnoCiteLabel);
+						noCiteLabel = new Label;
+						// noCiteLabel.text = predicationNumberLabel.text;
+						noCiteLabel.text = new String(numberCitations);
+						noCiteLabel.x = 100;
+						noCiteLabel.y = 60 + cNumLocal*20;
+						edgeInformation.addChild(noCiteLabel);
+
+						citeBtn = new Button();
+						citeBtn.label = "Citations";
+						citeBtn.width = 100;
+						citeBtn.x = 0;
+						citeBtn.y = 80 + cNumLocal*20;
+						edgeInformation.addChild(citeBtn);
+						citeBtn.addEventListener(MouseEvent.CLICK, buttonHandler);
+				// myGraph.vis.update();
+				// myGraph.redraw();
+
+			}
+
+			public function changeLayout(idx:int,animate:Boolean):void {
+         		var p:Array = new Array();
+         		myGraph.vis.operators[0].index = idx;
+	            for each (var c:CheckBox in clusterFilters)
+	            	if (c.selected) {
+	            		p.push(c.label);
+						// Alert.show(c.label, 'Alert Box', mx.controls.Alert.OK);
+					}
+				var s:Array = new Array();
+            	myGraph.filterCluster(p, highConnectivityNodes);
+        	}
+
+			public function searchConcept():void {
+				searchedConcepts = new Array();
+				var p:RegExp = new RegExp(conceptSearch.text, "i");
+				for each(var n:NodeSprite in myGraph.dataF.nodes){
+					if (n.visible && (n.data.name as String).match(p))
+						searchedConcepts.push( { label:n.data.name, node:n } );
+				}
+				searchList.dataProvider = searchedConcepts;
+			}
+
+			public function centerOnConcept(node:NodeSprite = null):void {
+
+				var n:NodeSprite;
+				if (node == null && searchList && searchList.selectedItem)
+					n = searchList.selectedItem.node as NodeSprite;
+				else
+					n = node;
+
+				if (n) {
+					moveToCenter(n.parent.x+n.x, n.parent.y+n.y,true);
+				}
+			}
+
+			public function saveFile():void {
+        		// var relevantSetString = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<RelevantCitations>\n";
+        		// import mx.rpc.http.HTTPService;
+        		// var uploadRelevantDocuments:mx.rpc.http.HTTPService = new mx.rpc.http.HTTPService();
+        		// import flash.system.Security;
+        		var relevantSetString:String;
+        		var nonRelevantSetString:String;
+				var titleString:String;
+				var pmidString:String;
+				var params:Object = {};
+				relevantSetString = "<RelevantCitations>\n";
+
+				for each(var data:Object in relevantList.dataProvider) {
+				 		var relevantString:String;
+				 		pmidString = new String(data.data);
+						titleString = new String(data.label);
+					  relevantString = "<Citation>\n<PMID>" + pmidString + "</PMID>\n<Title>" + escapeHTML(titleString, null) + "</Title>\n</Citation>\n";
+						relevantSetString = relevantSetString + relevantString;
+				}
+				relevantSetString = relevantSetString + "</RelevantCitations>\n";
+				nonRelevantSetString = "<NonrelevantCitations>\n";
+				for each(var data:Object in nonRelevantList.dataProvider) {
+				 		var nonRelevantString:String;
+				 		pmidString = new String(data.data);
+						titleString = new String(data.label);
+					    nonRelevantString = "<Citation>\n<PMID>" + pmidString + "</PMID>\n<Title>" + escapeHTML(titleString, null) + "</Title>\n</Citation>\n";
+						nonRelevantSetString = nonRelevantSetString + nonRelevantString;
+				}
+				nonRelevantSetString = nonRelevantSetString + "</NonrelevantCitations>\n";
+				var saveString:String = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<Citations>\n" + relevantSetString + nonRelevantSetString + "</Citations>\n";
+				// params["uploadString"] = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<Citations>\n" + relevantSetString + nonRelevantSetString + "</Citations>\n";
+				// uploadRelevantDocuments.addEventListener(MouseEvent.CLICK,saveCallBack);
+				// uploadRelevantDocuments.url="../servlet/RetrieveGraph?uploadString="+relevantSetString;
+				// uploadRelevantDocuments.url="../servlet/RetrieveGraph";
+				// uploadRelevantDocuments.method = "POST";
+				// uploadRelevantDocuments.send(params);
+
+				var fileName:String = "relevant.xml";
+				Security.allowDomain("*");
+				saveFileRef = new FileReference();
+				saveFileRef.addEventListener(Event.SELECT, onSaveFileSelected);
+				saveFileRef.save(saveString,fileName);
+			}
+
+			private function onSaveFileSelected(event:Event):void{
+				// saveFileRef.addEventListener(ProgressEvent.PROGRESS, onProgress);
+				// saveFileRef.addEventListener(Event.COMPLETE, onComplete);
+			}
+
+
+			private function saveCallBack(event:ResultEvent):void {
+    			import flash.system.Security;
+    			var urlstring:String = String(event.result);
+    			if (urlstring == null) {
+					noResults();
+					return}
+				Security.allowDomain("*");
+				trace(urlstring);
+    			myfile = new FileReference();
+    			configureListeners(myfile);
+    			var downloadURL:URLRequest;
+        		var fileName:String = "relevant.xml";
+    			downloadURL = new URLRequest();
+            	downloadURL.url = urlstring;
+            	myfile.download(downloadURL, fileName);
+			 }
+
+			public function captureCenter():void {
+				oldCenter = myGraph.globalToLocal(vbox1.localToGlobal(new Point(vbox1.width / 2, vbox1.height / 2)))
+			}
+
+			public function showConcept():void {
+				// edgeInformation.visible = false;
+				nodeInformation.alpha = 1.0;
+				nodeInformation.visible = true;
+				edgeInformation.visible = false;
+				//nodeInformation.left = 10;
+				//conceptLabel.left = 71;
+				//conceptLabel.right = 10;
+				//cuiLabel.left = 42;
+				//cuiLabel.right = 10;
+				//semtypeLabel.left = 85;
+				//semtypeLabel.right = 10;
+			}
+
+			public function showEdge():void {
+				nodeInformation.visible = false;
+				edgeInformation.alpha = 1.0;
+				edgeInformation.visible = true;
+
+
+				/*
+	 	 	 <mx:SetProperty target="{edgeInformation}" name="y"/>
+	 	 	 <mx:SetStyle target="{edgeInformation}" name="bottom" value="0"/>
+	 	 	 <mx:SetProperty target="{edgeInformation}" name="height"/>
+	 	 	 <mx:SetStyle target="{edgeInformation}" name="top" value="315"/>
+	 	 	 <mx:SetProperty target="{label1}" name="y" value="36"/>
+	 	 	 <mx:SetProperty target="{predicateLabel}" name="y" value="36"/>
+
+
+
+
+
+	 	 	 <mx:SetProperty target="{predicateLabel}" name="width" value="113.5"/>
+	 	 	 <mx:SetProperty target="{predicateLabel}" name="x"/>
+	 	 	 <mx:SetStyle target = "{predicateLabel}" name = "right" value = "10" / >
+				 -->*/
+
+			}
+
+			 private function configureListeners(dispatcher:IEventDispatcher):void {
+            dispatcher.addEventListener(Event.CANCEL, cancelHandler);
+            dispatcher.addEventListener(Event.COMPLETE, completeHandler);
+            dispatcher.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
+            dispatcher.addEventListener(Event.OPEN, openHandler);
+            dispatcher.addEventListener(ProgressEvent.PROGRESS, progressHandler);
+            dispatcher.addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);
+            dispatcher.addEventListener(Event.SELECT, selectHandler);
+        }
+
+        private function cancelHandler(event:Event):void {
+            trace("cancelHandler: " + event);
+        }
+
+        private function completeHandler(event:Event):void {
+            trace("completeHandler: " + event);
+        }
+
+        private function ioErrorHandler(event:IOErrorEvent):void {
+            trace("ioErrorHandler: " + event);
+        }
+
+        private function openHandler(event:Event):void {
+            trace("openHandler: " + event);
+        }
+
+        private function progressHandler(event:ProgressEvent):void {
+            var file:FileReference = FileReference(event.target);
+            trace("progressHandler name=" + file.name + " bytesLoaded=" + event.bytesLoaded + " bytesTotal=" + event.bytesTotal);
+        }
+
+        private function securityErrorHandler(event:SecurityErrorEvent):void {
+            trace("securityErrorHandler: " + event);
+        }
+
+        private function selectHandler(event:Event):void {
+            var file:FileReference = FileReference(event.target);
+            trace("selectHandler: name=" + file.name);
+        }
+
+
+
+
+
+		]]>
+	</mx:Script>
+
+
+	<mx:Resize id="resize" />
+	<!-- effectEnd="enterFirstState()"mouseWheel="zoomIt(event)"  -->
+
+	<mx:Move id="moveEffect" target="{myGraph}" />
+
+	<mx:VBox x="10" y="10" width="100%" height="100%" id="mainBox">
+		<mx:HBox x="10" y="10" width="100%" height="90%">
+			<mx:VBox height="100%" width="80%" borderStyle="inset"
+				backgroundColor="#ffffff" mouseDown="dragWhole()" mouseUp="stopDragWhole()" mouseMove="dragIt(event)"
+				 mouseWheel="zoomIt(event)" clipContent="false" autoLayout="false" id="vbox1"
+				resizeEffect="resize">
+				<graph:GraphVisualizer width="100%" height="100%" id="myGraph" themeColor="#0000ff"/>
+
+			</mx:VBox>
+			<mx:Accordion width="18%" height="100%" id="accordion1">
+				<mx:VBox label="Information" width="100%" height="100%" id="canvas1" backgroundColor="0xFAFAFF">
+					<!-- <mx:HRule height="1" verticalCenter="-5" left="10" right="10"/>-->
+					<mx:Label text="Concept Information"/>
+					<mx:Canvas width="100%" height="45%" id="nodeInformation" alpha="1.0" visible="false" showEffect="fadeIn" hideEffect="fadeOut">
+					    <!--        horizontalScrollPolicy="off" verticalScrollPolicy="off"> -->
+						<mx:Label left="10" y="36" text="CUI:"/>
+						<mx:Label left="10" y="62" text="Sem. type:"/>
+						<mx:Label right="10" y="62" text="Label" maxWidth="150" styleName="text" textAlign="right" id="semtypeLabel"/>
+						<mx:Label right="10" y="36" text="Label" maxWidth="150" styleName="text" textAlign="right" id="cuiLabel"/>
+						<mx:Label left="10" y="10" text="Concept:"/>
+						<mx:Label right="10" y="10" text="Label" maxWidth="100" textAlign="right" id="conceptLabel"/>
+						<mx:Label left="10" y="88" text="No. Predications:"/>
+						<mx:Label y="88" text="Label" textAlign="right" left="127" right="10" id="nodePredicationLabel" />
+						<mx:Label x="10" y="140" text="Label" id="umlsLink" visible="false"/>
+						<mx:Label x="11" y="140" text="Label" id="ghrLink" visible="false"/>
+						<mx:Label x="12" y="140" text="Label" id="omimLink" visible="false"/>
+						<mx:Label x="13" y="140" text="Label" id="entrezLink" visible="false"/>
+						<mx:Button label="UMLS" id="umlsButton" width="66" bottom="56" horizontalCenter="-34">
+							<mx:click>navigateToURL(new URLRequest(umlsLink.text), '_blank')</mx:click>
+						</mx:Button>
+						<mx:Button label="GHR" id="ghrButton" horizontalCenter="34" width="68.5" bottom="56">
+							<mx:click>navigateToURL(new URLRequest(ghrLink.text), '_blank')</mx:click>
+						</mx:Button>
+						<mx:Button label="OMIM" horizontalCenter="-34" id="omimButton" width="65" bottom="20">
+							<mx:click>navigateToURL(new URLRequest(omimLink.text), '_blank')</mx:click>
+						</mx:Button>
+						<mx:Button horizontalCenter="34" label="ENTREZ" id="entrezButton" bottom="20">
+							<mx:click>navigateToURL(new URLRequest(entrezLink.text), '_blank')</mx:click>
+						</mx:Button>
+					</mx:Canvas>
+					<mx:Label text="Relationship Information"/>
+					<mx:Canvas width="100%" height="45%" id="edgeInformation" alpha="1.0" visible="false" showEffect="fadeIn" hideEffect="fadeOut">
+						<!--		horizontalScrollPolicy="off" verticalScrollPolicy="off">
+						 <mx:Label x="0" y="0" text="Subject:" id="sL" />
+						<mx:Label y="0" text="Label" id="sourceLabel" maxWidth="100" textAlign="right" right="10"/>
+
+						<mx:Label x="10" y="36" text="Relation:" id="label1"/>
+						<mx:Label right="10" y="36" text="Label" maxWidth="150" textAlign="right" id="predicateLabel"/>
+
+						<mx:Label x="10" y="62" text="Object:"/>
+						<mx:Label y="62" text="Label" textAlign="right" maxWidth="100"  id="targetLabel" right="10"/>
+
+						<mx:Label x="10" y="86" text="No. Predications:"/>
+						<mx:Label y="86" text="Label" textAlign="right" width="100" id="predicationNumberLabel" right="10"/>
+
+						<mx:Label x="10" y="110" text="No. Citations:"/>
+						<mx:Label y="110" text="Label" textAlign="right" width="100" id="citationNumberLabel" right="10"/> -->
+
+
+						<mx:Button label="Citations" bottom="25" horizontalCenter="0">
+							<mx:click>
+								<![CDATA[
+									if (currentState=='relevant')
+										showingRelevantCitation=true;
+									retrieveCitations();
+									if (currentState=='relevant')
+										currentState='relevantCitation';
+									else
+										currentState='citation';
+								]]>
+							</mx:click>
+						</mx:Button>
+					</mx:Canvas>
+					<!--
+
+
+					-->
+				</mx:VBox>
+				<mx:VBox label="Relation Labels/Cluster" width="100%" height="100%" id="form1" paddingLeft="10" backgroundColor="0xFAFAFF">
+				</mx:VBox>
+				<mx:VBox label="Search" width="100%" height="100%" id="form2" paddingLeft="10" paddingRight="10" backgroundColor="0xFAFAFF">
+					<mx:VBox width="100%" height="100%">
+						<mx:Label text="Search for concept:"/>
+						<mx:HBox width="100%">
+							<mx:TextInput left="20" id="conceptSearch"/>
+							<mx:Button label="Search" id="searchButton" click="searchConcept()"/>
+						</mx:HBox>
+						<mx:List dataProvider="{searchedConcepts}" width="100%" click="centerOnConcept()" id="searchList">
+						</mx:List>
+					</mx:VBox>
+				</mx:VBox>
+			</mx:Accordion>
+		</mx:HBox>
+		<mx:ApplicationControlBar height="40" width="98%" id="hbox1" fillColors="[#ffffff, #ffffff]" fillAlphas="[1.0, 1.0]">
+			<mx:Label text="Layout:"/>
+			<mx:ComboBox dataProvider="{layoutOptions}" id="layoutChoose"
+			             close="myGraph.changeLayout(ComboBox(event.target).selectedItem.data,false)"
+			             width="143" horizontalCenter="-431" verticalCenter="318.5" selectedIndex="0">
+			</mx:ComboBox>
+			<mx:Button icon="@Embed('img/ZoomIn28.png')" width="40" height="32" horizontalCenter="-331" verticalCenter="323.5">
+				<mx:click>
+				<![CDATA[
+					var center:Point = getViewportCenter();
+					Application.application.zoom*=2.0;
+					myGraph.scaleX = Application.application.zoom;
+					myGraph.scaleY = Application.application.zoom;
+
+					moveToCenter(center.x,center.y);
+					// myGraph.zoom(zoom);
+				]]>
+				</mx:click>
+			</mx:Button>
+			<mx:Button icon="@Embed('img/ZoomOut28.png')" height="32" horizontalCenter="-283" verticalCenter="323.5">
+				<mx:click>
+				<![CDATA[
+					var center:Point = getViewportCenter();
+					Application.application.zoom/=2.0;
+					myGraph.scaleX = Application.application.zoom;
+					myGraph.scaleY = Application.application.zoom;
+
+					moveToCenter(center.x,center.y);
+					// myGraph.zoom(zoom);
+				]]>
+				</mx:click>
+			</mx:Button>
+			<mx:Button id="stopButton" label="Stop" horizontalCenter="-143" verticalCenter="318.5">
+				<mx:click>
+					<![CDATA[
+						if (stopButton.label=="Stop"){
+							myGraph.stop();
+							stopButton.label = "Restart";
+						}else{
+							myGraph.play();
+							stopButton.label = "Stop";
+						}
+					]]>
+				</mx:click>
+			</mx:Button>
+			<!-- <mx:Button label="List of Titles" id="relevantButton" toggle="true">
+				<mx:click>
+					<![CDATA[
+						// retrieveTitles();
+						if (relevantButton.selected){
+							//captureCenter()
+							currentState='relevant';
+						}else{
+							myGraph.unglow();
+							//captureCenter()
+							currentState='';
+						}
+					]]>
+				</mx:click>
+			</mx:Button>
+			<mx:Slider id="nodeSlider" label="Adjust # of nodes">
+			</mx:Slider> -->
+		</mx:ApplicationControlBar>
+	</mx:VBox>
+</mx:Application>
+

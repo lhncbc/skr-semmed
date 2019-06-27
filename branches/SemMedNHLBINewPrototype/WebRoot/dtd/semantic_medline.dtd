@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT SemanticMedline (Query, 
+						   PubmedArticleSet?,
+						   ClinicalStudySet?, 
+						   PredicationType?, 
+						   SemrepResultSet?, 
+						   SummaryType?,
+						   SelectedSeed?,
+						   Saliency?,
+						   SelectedSaliencyType?,
+						   SummaryResultSet?) >
+<!ELEMENT Query (Term,
+				 Source,
+				 QueryOptions) >
+<!ELEMENT QueryOptions (MostRecent?,
+				 		StartDate?,
+				 		EndDate?,
+				 		MaxRank?,
+				 		IncludeNonRecruiting?) >
+<!ELEMENT PubmedArticleSet (PubmedArticle*) >
+<!ELEMENT PubmedArticle (MedlineCitation) >
+<!ELEMENT MedlineCitation (PMID, Article) >
+<!ELEMENT Article (ArticleTitle, Abstract, Journal) >
+<!ELEMENT Abstract (AbstractText) >
+<!ELEMENT Journal (JournalIssue) >
+<!ELEMENT JournalIssue (PubDate) >
+<!ELEMENT PubDate (MedlineDate) >
+<!ELEMENT ClinicalStudySet (clinical_study*) >
+<!ELEMENT clinical_study (study_id, brief_title, brief_summary, status_block) >
+<!ELEMENT study_id (nct_id) >
+<!ELEMENT brief_title (textblock) >
+<!ELEMENT brief_summary (textblock) >
+<!ELEMENT status_block (overall_status) >
+<!ELEMENT SemrepResultSet (SentencePredication*) >
+<!ELEMENT SentencePredication (Sentence, Predication, PredicationNumber) >
+<!ELEMENT Sentence (PMID, Type, Number, SentenceText) >
+<!ELEMENT Predication (PredicationId, Predicate, Type, PredicationArgument+) >
+<!ELEMENT PredicationArgument (ConceptSemtype, Type)>
+<!ELEMENT ConceptSemtype (Concept, Semtype, Novel) >
+<!ELEMENT Concept (ConceptId, CUI, PreferredName, Type, Ghr, Omim) >
+<!ELEMENT SummaryResultSet (SentencePredication*) >
+<!ELEMENT Term (#PCDATA) >
+<!ELEMENT Source (#PCDATA) >
+<!ELEMENT MostRecent (#PCDATA) >
+<!ELEMENT StartDate (#PCDATA) >
+<!ELEMENT EndDate (#PCDATA) >
+<!ELEMENT MaxRank (#PCDATA) >
+<!ELEMENT IncludeNonRecruiting (#PCDATA) >
+<!ELEMENT PMID (#PCDATA) >
+<!ELEMENT ArticleTitle (#PCDATA) >
+<!ELEMENT AbstractText (#PCDATA) >
+<!ELEMENT MedlineDate (#PCDATA) >
+<!ELEMENT nct_id (#PCDATA) >
+<!ELEMENT overall_status (#PCDATA) >
+<!ELEMENT textblock (#PCDATA) >
+<!ELEMENT overall_status (#PCDATA) >
+<!ELEMENT PredicationType (#PCDATA) >
+<!ELEMENT Type (#PCDATA) >
+<!ELEMENT Number (#PCDATA) >
+<!ELEMENT SentenceText (#PCDATA) >
+<!ELEMENT PredicationId (#PCDATA) >
+<!ELEMENT Predicate (#PCDATA) >
+<!ELEMENT ConceptId (#PCDATA) >
+<!ELEMENT CUI (#PCDATA) >
+<!ELEMENT PreferredName (#PCDATA) >
+<!ELEMENT Ghr (#PCDATA) >
+<!ELEMENT Omim (#PCDATA) >
+<!ELEMENT Semtype (#PCDATA) >
+<!ELEMENT Novel (#PCDATA) >
+<!ELEMENT PredicationNumber (#PCDATA) >
+<!ELEMENT SummaryType (#PCDATA) >
+<!ELEMENT SelectedSeed (#PCDATA) >
+<!ELEMENT Saliency (#PCDATA) >
+<!ELEMENT SelectedSaliencyType (#PCDATA) >
+<!ELEMENT Language (#PCDATA) >

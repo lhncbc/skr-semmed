@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" horizontalScrollPolicy="off">
+	<mx:Script>
+        <![CDATA[
+            // Import Event and URLRequest classes.
+            import flash.events.Event;
+            import flash.net.URLRequest;
+                
+            private var u:URLRequest;
+            
+            // Event handler to open URL using 
+            // the navigateToURL() method.
+            private function openLink(eventObj:Event):void {
+                u = new URLRequest("http://www.ncbi.nlm.nih.gov/sites/entrez?"+
+					"cmd=Retrieve&db=pubmed&dopt=AbstractPlus&list_uids="+data.data);
+                navigateToURL(u,"_blank");
+            }   
+        ]]>
+    </mx:Script>
+
+
+	<mx:LinkButton id="pmid" label="{data.data}" click="openLink(event)" />
+	<mx:Label id="title" text="{data.label}"/>	
+</mx:HBox>
